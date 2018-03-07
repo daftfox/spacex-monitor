@@ -1,0 +1,29 @@
+.image-overlay {
+    height: 8rem;
+    position: relative;
+    top: -8rem;
+    background-color: rgba(25,25,25, 0.8);
+
+    color: white;
+}
+
+.page {
+    margin-top: -8rem;
+}
+
+.page .gradient {
+    height: 50px;
+    width: 100%;
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.23) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.23) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.23) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+
+.image-overlay .page-info {
+    padding: 1rem 0;
+}
+
+.image-overlay .page-info .subtitle {
+    color: lightgray;
+}
