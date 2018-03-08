@@ -19,9 +19,9 @@ export class RocketService {
     }
     
     // get all rockets
-	public getAllRockets(params?: URLSearchParams): Observable<any> {
+	public getAllRockets(): Observable<any> {
 		const url = `${this.API_BASE_URL}`;
-		return this.http.get(url, {search: params}).map((response: Response) => response.json());
+		return this.http.get(url).map((response: Response) => response.json());
 	}
 
 	// get rocket by id

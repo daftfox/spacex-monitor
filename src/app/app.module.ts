@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { CraftComponent } from './components/craft/craft.component';
 import { LaunchesComponent } from './components/launches/launches.component';
+import { RocketsComponent } from './components/craft/rockets/rockets.component';
 
 import { LaunchService } from './services/launch.service';
 import { LaunchpadService } from './services/launchpad.service';
@@ -38,7 +39,12 @@ const routes: Routes = [
     } 
   }, { 
     path: 'craft', 
-    component: CraftComponent }
+    component: CraftComponent,
+    children: [
+      { path: '', redirectTo: 'rockets', pathMatch: 'full' },
+      { path: 'rockets', component: RocketsComponent }
+    ]
+  }
  ];
 
 @NgModule({
@@ -47,7 +53,8 @@ const routes: Routes = [
     HeaderComponent,
     HomeComponent,
     LaunchesComponent,
-    CraftComponent
+    CraftComponent,
+    RocketsComponent
   ],
   imports: [
     HttpModule,
