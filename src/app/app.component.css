@@ -21,9 +21,23 @@
 }
 
 .image-overlay .page-info {
-    padding: 1rem 0;
+    padding: 2.3rem 0 0;
 }
 
 .image-overlay .page-info .subtitle {
     color: lightgray;
+}
+
+.cover-image {
+    height: 70vh;
+    transition: 1s;
+    background-size: cover;
+}
+
+.cover-image.mars{
+    background-image: url('../assets/images/mars.jpg');
+}
+
+.cover-image.liftoff{
+    background-image: url('../assets/images/falcon-heavy-launch-liftoff.jpg');
 }

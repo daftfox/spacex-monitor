@@ -1,17 +1,17 @@
 <spacex-header (pageTitle)="pageTitleUpdated($event)"></spacex-header>
 
 <div class="container-fluid p-0">
-  <img src="./assets/images/roadster.jpg" class="img-fluid" alt="Responsive image" />
+  <div [ngClass]="coverImage" class="cover-image"></div>
   <div class="m-0 image-overlay row justify-content-center">
     <div class="page-info col-6">
-      <h1>Page title</h1>
-      <span class="subtitle">Sub title</span>
+      <h1>{{pageTitle}}</h1>
+      <span class="subtitle">{{subTitle}}</span>
     </div>
   </div>
 
   <div class="page row justify-content-center no-gutters">
     <div class="gradient"></div>
-    <div class="col-6">
+    <div [ngClass]="{'col-6': pageTitle === 'Home', 'col-10': pageTitle !== 'Home'}">
       <router-outlet></router-outlet>
     </div>
   </div>
