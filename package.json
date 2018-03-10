@@ -4,8 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
+    "build-prod": "ng build --prod --aot --base-href '/spacex-monitor/' --output-hashing none",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build",
     "test": "echo 'no tests'",
     "lint": "ng lint",
     "e2e": "ng e2e"
