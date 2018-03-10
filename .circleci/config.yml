@@ -16,7 +16,7 @@ jobs:
           - v1-dependencies-
 
       - run:
-          command: npm run install && sudo npm install -g typescript
+          command: npm install
           name: Installing Dependencies
 
       - save_cache:
