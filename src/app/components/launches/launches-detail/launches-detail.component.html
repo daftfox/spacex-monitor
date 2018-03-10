@@ -94,7 +94,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let core of launch.rocket.first_stage.cores">
-                            <td>{{core.core_serial}}</td>
+                            <td>
+                                <a [routerLink]="['/cores', core.core_serial]">{{core.core_serial}}</a>
+                            </td>
                             <td>{{core.flight}}</td>
                             <td>
                                 <i class="success fa"
