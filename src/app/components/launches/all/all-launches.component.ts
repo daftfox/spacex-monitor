@@ -3,7 +3,6 @@ import { LaunchService } from '../../../services/launch.service';
 import { LaunchpadService } from '../../../services/launchpad.service';
 import { RocketService } from '../../../services/rocket.service';
 import { Observer } from 'rxjs/Observer';
-import { URLSearchParams } from '@angular/http';
 
 @Component({
     selector: 'all-launches-component',
@@ -18,9 +17,9 @@ export class AllLaunchesComponent {
     launchpads: Array<any>;
     rockets: Array<any>;
     filters = {
-        selectedLaunchpad: null,
-        successful: null,
-        selectedRocket: null
+        site_id: null,
+        launch_success: null,
+        rocket_id: null
     };
 
     launchSub: any;
@@ -49,7 +48,8 @@ export class AllLaunchesComponent {
 
     getLaunches(): void {
         if (this.launchSub) this.launchSub.unsubscribe();
-        this.launchSub = this.launchService.getAll(this.getQueryParams())
+        console.log(this.filters);
+        this.launchSub = this.launchService.getAll(this.filters)
             .subscribe(
                 res => this.launches = res,
                 err => { console.log(err); }
@@ -72,13 +72,5 @@ export class AllLaunchesComponent {
                 res => this.rockets = res,
                 err => { console.log(err); }
             );
-    }
-
-    private getQueryParams(): URLSearchParams {
-        let params = new URLSearchParams();
-        params.append('site_id', this.filters.selectedLaunchpad);
-        params.append('launch_success', this.filters.successful);
-        params.append('rocket_id', this.filters.selectedRocket);
-        return params;
     }
 }

@@ -18,14 +18,14 @@ export class LaunchService extends ApiService{
 		this.API_BASE_URL += '/launches';
 	}
 	
-	// get all elements
-	public getAll(params?: URLSearchParams): Observable<any> {
+	// get all launches
+	public getAll(params?: any): Observable<any> {
 		const url = `${this.API_BASE_URL}/all`;
-		return this.http.get(url, {search: params}).map((response: Response) => response.json());
+		return this.http.get(url, {search: super.getQueryParams(params)}).map((response: Response) => response.json());
 	}
 
 	// get all past launches
-	public getAllPast(params: URLSearchParams) {
+	public getAllPast(params: any) {
 		super.getAll(params);
 	}
 

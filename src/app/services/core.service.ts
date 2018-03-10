@@ -1,18 +1,18 @@
-import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import { ApiService } from './api.service';
 
 /**
- * @name LaunchpadService
+ * @name CoreService
  * @description
- * This Service is used for retrieving data about launchpads used by SpaceX from `api.spacexdata.com`
+ * This Service is used for retrieving data about cores from `api.spacexdata.com`
  * @param Http injectable provided by angular for making http calls
  * @extends ApiService
  */
 @Injectable()
-export class LaunchpadService extends ApiService{
+export class CoreService extends ApiService {
 	constructor(protected http: Http) {
 		super(http);
-		this.API_BASE_URL += '/launchpads';
+		this.API_BASE_URL += '/parts/cores';
     }
 }

@@ -1,7 +1,5 @@
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
 import { ApiService } from './api.service';
 
 /**
@@ -17,11 +15,5 @@ export class CapsuleService extends ApiService {
 	constructor(protected http: Http) {
 		super(http);
 		this.API_BASE_URL += '/capsules';
-	}
-	
-	// get all capsules
-	public getAll(params?: URLSearchParams): Observable<any> {
-		const url = `${this.API_BASE_URL}`;
-		return this.http.get(url, {search: params}).map((response: Response) => response.json());
 	}
 }

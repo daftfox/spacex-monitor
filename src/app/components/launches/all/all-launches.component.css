@@ -2,10 +2,6 @@
     vertical-align: middle;
 }
 
-.w1rem {
-    width: 1rem;
-}
-
 .payloads td:nth-child(1) {
     width: 25%;
 }

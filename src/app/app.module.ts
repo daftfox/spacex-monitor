@@ -18,11 +18,15 @@ import { CapsulesComponent } from './components/craft/capsules/capsules.componen
 import { AllCraftComponent } from './components/craft/all/all-craft.component';
 import { AllLaunchesComponent } from './components/launches/all/all-launches.component';
 import { LaunchesDetailComponent } from './components/launches/launches-detail/launches-detail.component';
+import { CoresComponent } from './components/cores/cores.component';
+import { AllCoresComponent } from './components/cores/all/all-cores.component';
+import { CoresDetailComponent } from './components/cores/cores-detail/cores-detail.component';
 
 import { LaunchService } from './services/launch.service';
 import { LaunchpadService } from './services/launchpad.service';
 import { RocketService } from './services/rocket.service';
 import { CapsuleService } from './services/capsule.service';
+import { CoreService } from './services/core.service';
 
 import { SafePipe } from './pipes/safe.pipe';
 
@@ -39,6 +43,30 @@ const routes: Routes = [
       subTitle: 'About this app and SpaceX.',
       cover_image: 'mars'
     } 
+  }, { 
+    path: 'cores', 
+    component: CoresComponent, 
+    children: [
+      { path: '', redirectTo: 'all', pathMatch: 'full' },
+      { 
+        path: 'all', 
+        component: AllCoresComponent,
+        data: {
+          pageTitle: 'Cores', 
+          subTitle: 'A list containing all rocket core components.',
+          cover_image: 'liftoff'
+        }
+      },
+      { 
+        path: ':id', 
+        component: CoresDetailComponent,
+        data: {
+          pageTitle: 'cd', 
+          subTitle: ' ',
+          cover_image: 'liftoff'
+        }
+      }
+    ]
   }, { 
     path: 'launches', 
     component: LaunchesComponent, 
@@ -118,7 +146,10 @@ const routes: Routes = [
     CapsulesComponent,
     AllCraftComponent,
     AllLaunchesComponent,
-    LaunchesDetailComponent
+    LaunchesDetailComponent,
+    CoresComponent,
+    AllCoresComponent,
+    CoresDetailComponent
   ],
   imports: [
     HttpModule,
@@ -126,7 +157,6 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes, {useHash: true}),
     AgmCoreModule.forRoot({
-      //apiKey: 'AIzaSyBFGtORKXAUM9_mDPfdTuPnP_M9fcWEMOc'
       apiKey: 'AIzaSyDsCE5gAJnCw2LEBvCQRXWCn3ne-S5lZEw'
     })
   ],
@@ -134,7 +164,8 @@ const routes: Routes = [
     LaunchService,
     LaunchpadService,
     RocketService,
-    CapsuleService
+    CapsuleService,
+    CoreService
   ],
   bootstrap: [AppComponent]
 })
