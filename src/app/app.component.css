@@ -38,6 +38,26 @@
     background-image: url('../assets/images/mars.jpg');
 }
 
+.cover-image.roadster{
+    background-image: url('../assets/images/roadster.jpg');
+}
+
 .cover-image.liftoff{
     background-image: url('../assets/images/falcon-heavy-launch-liftoff.jpg');
+}
+
+.cover-image.landing{
+    background-image: url('../assets/images/falcon-heavy-launch-boosters-landing.jpg');
+}
+
+.cover-image.capsule{
+    background-image: url('../assets/images/dragon-v2-interior.jpg');
+}
+
+.cover-image.falconheavy{
+    background-image: url('../assets/images/falconheavy-cover.jpg');
+}
+
+.cover-image.falcon1{
+    background-image: url('../assets/images/falcon1-cover.jpg');
 }

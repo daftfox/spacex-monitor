@@ -18,13 +18,13 @@ export class RocketsComponent {
     
     rocketSub: any;
 
-    constructor(private rocketService:    RocketService) {
+    constructor(private rocketService: RocketService) {
         this.getRockets();
     }
 
     private getRockets(): void {
         if (this.rocketSub) this.rocketSub.unsubscribe();
-        this.rocketService.getAllRockets()
+        this.rocketService.getAll()
             .subscribe(
                 res => this.rockets = res,
                 err => { console.log(err); }
