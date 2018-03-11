@@ -1,10 +1,10 @@
 {
     "short_name": "SpacexMonitor",
     "name": "SpaceX Monitor",
-    "start_url": "/spacex-monitor/",
+    "start_url": "https://timothy.fyi/spacex-monitor/",
 
     "theme_color": "#fff",
-    "background_color": "#333",
+    "background_color": "#292b2c",
 
     "display": "standalone",
     "orientation": "portrait",
