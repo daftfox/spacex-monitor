@@ -1,0 +1,20 @@
+{
+    "short_name": "SpacexMonitor",
+    "name": "SpaceX Monitor",
+    "start_url": "/",
+
+    "theme_color": "#fff",
+    "background_color": "#333",
+
+    "display": "standalone",
+    "orientation": "portrait",
+
+    "icons": [
+        {
+            "src": "/assets/images/falconheavy.png",
+            "sizes": "500x500",
+            "type": "image/png"
+        }
+    ]
+
+}

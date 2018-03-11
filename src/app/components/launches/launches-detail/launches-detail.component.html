@@ -88,6 +88,7 @@
                        *ngIf="launch">
                     <thead class="thead-inverse">
                         <th>Serial</th>
+                        <th>Block</th>
                         <th>Flight #</th>
                         <th>Successful landing</th>
                         <th>Reused</th>
@@ -97,6 +98,7 @@
                             <td>
                                 <a [routerLink]="['/cores', core.core_serial]">{{core.core_serial}}</a>
                             </td>
+                            <td>{{core.block}}</td>
                             <td>{{core.flight}}</td>
                             <td>
                                 <i class="success fa"
@@ -137,6 +139,11 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="row mt-3 justify-content-centerS">
+            <div class="col-6">
+                <div [innerHtml]="iframe_html"></div>
             </div>
         </div>
     </div>

@@ -4,8 +4,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ServiceWorkerModule } from '@angular/service-worker'
 
 import { AgmCoreModule } from '@agm/core';
+import { EmbedVideo } from 'ngx-embed-video';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -29,6 +31,7 @@ import { CapsuleService } from './services/capsule.service';
 import { CoreService } from './services/core.service';
 
 import { SafePipe } from './pipes/safe.pipe';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { 
@@ -158,7 +161,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {useHash: true}),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDsCE5gAJnCw2LEBvCQRXWCn3ne-S5lZEw'
-    })
+    }),
+    EmbedVideo.forRoot(),
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
     LaunchService,
