@@ -4,9 +4,8 @@
     "description": "A simple web app to load data from the spacexdata api",
     "lang": "en-US",
     "start_url": "https://timothy.fyi/spacex-monitor",
-    "scope": "/spacex-monitor",
-    "display": "fullscreen",
-    "orientation": "landscape-primary",
+    "display": "standalone",
+    "orientation": "portrait",
     "theme_color": "#292b2c",
     "icons": [
         {

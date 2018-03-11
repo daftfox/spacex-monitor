@@ -30,14 +30,14 @@
   }],
   "dataGroups": [
     {
-      "name": "api-performance",
-      "urls": ["/launches", "/capsules", "rockets", "/launchpads", "/parts"],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 100,
-        "maxAge": "1d",
+        "name": "spacex-api",
+        "urls": ["/launches", "/rockets", "/launchpads", "/capsules", "/parts"],
+        "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 20,
+        "maxAge": "1h",
         "timeout": "10s"
-      }
+        }
     }
   ]
 }
