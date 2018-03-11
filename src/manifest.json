@@ -1,19 +1,19 @@
 {
-    "short_name": "SpacexMonitor",
     "name": "SpaceX Monitor",
-    "start_url": "https://timothy.fyi/spacex-monitor/",
-
-    "theme_color": "#fff",
-    "background_color": "#292b2c",
-
-    "display": "standalone",
-    "orientation": "portrait",
-
+    "short_name": "SpaceX Monitor",
+    "description": "A simple web app to load data from the spacexdata api",
+    "lang": "en-US",
+    "start_url": "https://timothy.fyi",
+    "scope": "/spacex-monitor",
+    "display": "fullscreen",
+    "orientation": "landscape-primary",
+    "theme_color": "#292b2c",
     "icons": [
         {
             "src": "./assets/icons/icon.png",
-            "sizes": "500x500",
+            "sizes": "192x192",
             "type": "image/png"
         }
-    ]
+    ],
+    "background_color": "#292b2c"
 }
