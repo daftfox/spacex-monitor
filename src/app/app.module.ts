@@ -163,7 +163,7 @@ const routes: Routes = [
       apiKey: 'AIzaSyDsCE5gAJnCw2LEBvCQRXWCn3ne-S5lZEw'
     }),
     EmbedVideo.forRoot(),
-    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
+    environment.production ? ServiceWorkerModule.register('./ngsw-worker.js') : []
   ],
   providers: [
     LaunchService,
