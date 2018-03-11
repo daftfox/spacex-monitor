@@ -3,7 +3,7 @@
     "short_name": "SpaceX Monitor",
     "description": "A simple web app to load data from the spacexdata api",
     "lang": "en-US",
-    "start_url": "/spacex-monitor/",
+    "start_url": "/spacex-monitor/index.html",
     "display": "standalone",
     "orientation": "portrait",
     "theme_color": "#292b2c",

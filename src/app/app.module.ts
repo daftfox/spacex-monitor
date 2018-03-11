@@ -33,6 +33,7 @@ import { CoreService } from './services/core.service';
 import { SafePipe } from './pipes/safe.pipe';
 import { HttpsPipe } from './pipes/https.pipe';
 import { environment } from '../environments/environment';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 const routes: Routes = [
   { 
@@ -165,7 +166,7 @@ const routes: Routes = [
       apiKey: 'AIzaSyDsCE5gAJnCw2LEBvCQRXWCn3ne-S5lZEw'
     }),
     EmbedVideo.forRoot(),
-    environment.production ? ServiceWorkerModule.register('./ngsw-worker.js') : []
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
     LaunchService,
@@ -177,3 +178,10 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// platformBrowserDynamic().bootstrapModule(AppModule)
+//   .then(() => {
+//     if ('serviceWorker' in navigator) {
+//       navigator.serviceWorker
+//     }
+//   })

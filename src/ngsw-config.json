@@ -5,8 +5,10 @@
     "installMode": "prefetch",
     "resources": {
       "files": [
-        "/favicon.ico",
-        "/index.html"
+        "assets/images/icons/icon.png",
+        "index.html",
+        "manifest.json",
+        "ngsw.json"
       ],
       "urls": [
         "https://use.fontawesome.com/releases/**",
