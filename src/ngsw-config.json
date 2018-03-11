@@ -30,14 +30,14 @@
   }],
   "dataGroups": [
     {
-        "name": "api-performance",
-        "urls": ["/launches/all", "/capsules", "rockets", "/launchpads", "/parts/cores"],
-        "cacheConfig": {
-          "strategy": "performance",
-          "maxSize": 100,
-          "maxAge": "1d",
-          "timeout": "10s"
-        }
+      "name": "api-performance",
+      "urls": ["/launches", "/capsules", "rockets", "/launchpads", "/parts"],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "1d",
+        "timeout": "10s"
+      }
     }
   ]
 }
