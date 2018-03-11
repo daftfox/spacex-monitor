@@ -31,7 +31,7 @@
   "dataGroups": [
     {
         "name": "spacex-api",
-        "urls": ["/launches", "/rockets", "/launchpads", "/capsules", "/parts"],
+        "urls": ["https://api.spacexdata.com/v2"],
         "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 20,

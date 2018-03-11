@@ -31,6 +31,7 @@ import { CapsuleService } from './services/capsule.service';
 import { CoreService } from './services/core.service';
 
 import { SafePipe } from './pipes/safe.pipe';
+import { HttpsPipe } from './pipes/https.pipe';
 import { environment } from '../environments/environment';
 
 const routes: Routes = [
@@ -139,6 +140,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     SafePipe,
+    HttpsPipe,
     AppComponent,
     HeaderComponent,
     HomeComponent,
