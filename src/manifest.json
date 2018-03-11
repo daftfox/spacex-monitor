@@ -1,7 +1,7 @@
 {
     "short_name": "SpacexMonitor",
     "name": "SpaceX Monitor",
-    "start_url": "/",
+    "start_url": "/spacex-monitor/",
 
     "theme_color": "#fff",
     "background_color": "#333",
