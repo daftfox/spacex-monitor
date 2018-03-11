@@ -16,7 +16,7 @@ export class ApiService {
 	protected API_BASE_URL: string;
 
 	constructor(protected http: Http) {
-		this.API_BASE_URL = 'http://api.spacexdata.com/v2';
+		this.API_BASE_URL = 'https://api.spacexdata.com/v2';
     }
     
     // get all elements

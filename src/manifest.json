@@ -11,9 +11,9 @@
 
     "icons": [
         {
-            "src": "./assets/images/falconheavy.png",
+            "src": "./assets/images/falconheavy.jpg",
             "sizes": "500x500",
-            "type": "image/png"
+            "type": "image/jpg"
         }
     ]
 }
