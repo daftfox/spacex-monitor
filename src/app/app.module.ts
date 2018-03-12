@@ -178,10 +178,3 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-// platformBrowserDynamic().bootstrapModule(AppModule)
-//   .then(() => {
-//     if ('serviceWorker' in navigator) {
-//       navigator.serviceWorker
-//     }
-//   })

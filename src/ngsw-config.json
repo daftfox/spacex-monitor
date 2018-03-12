@@ -1,14 +1,13 @@
 {
-  "index": "/index.html",
+  "index": "/",
   "assetGroups": [{
     "name": "app",
     "installMode": "prefetch",
+    "updateMode": "prefetch",
     "resources": {
       "files": [
-        "assets/images/icons/icon.png",
-        "index.html",
-        "manifest.json",
-        "ngsw.json"
+        "/assets/images/icons/icon.png",
+        "/index.html"
       ],
       "urls": [
         "https://use.fontawesome.com/releases/**",

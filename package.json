@@ -4,11 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "build-prod": "ng build --prod --aot --base-href '/spacex-monitor/' --output-hashing none",
-    "ngsw-config": "node_modules/.bin/ngsw-config dist src/ngsw-config.json /spacex-monitor/",
-    "ngsw-copy": "cp node_modules/@angular/service-worker/ngsw-worker.js dist/",
+    "build-prod": "ng build --prod --aot --base-href /spacex-monitor/ --output-hashing none",
     "start": "ng serve",
-    "build": "ng build --prod && npm run ngsw-config && npm run ngsw-copy",
+    "build": "ng build --prod",
     "test": "echo 'no tests'",
     "lint": "ng lint",
     "e2e": "ng e2e"
