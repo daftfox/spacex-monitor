@@ -34,9 +34,9 @@
         "name": "spacex-api",
         "urls": ["/launches", "/rockets", "/launchpads", "/capsules", "/parts"],
         "cacheConfig": {
-        "strategy": "freshness",
+        "strategy": "performance",
         "maxSize": 20,
-        "maxAge": "1h",
+        "maxAge": "1d",
         "timeout": "10s"
         }
     }
