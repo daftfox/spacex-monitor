@@ -128,8 +128,8 @@
                                 </th>
                                 <td style="width: 75px;">
                                     <img *ngIf="launch.links.mission_patch"
-                                            class="img-fluid"
-                                            src="{{launch.links.mission_patch | https}}"/>
+                                          class="img-fluid"
+                                          src="{{launch.links.mission_patch | https}}"/>
                                 </td>
                                 <td valign="middle">
                                     <a [routerLink]="['/craft','rockets', launch.rocket.rocket_id]">{{launch.rocket.rocket_name}}</a>
