@@ -3,7 +3,6 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { RocketService } from './services/rocket.service';
 import { LaunchService } from './services/launch.service';
 import 'rxjs/add/operator/filter';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -48,13 +47,20 @@ export class AppComponent {
         });
   }
 
+  private getDateString(date: string): string {
+      let dateString = '';
+      const dateObj = new Date(date);
+      dateString += `${dateObj.getDate()}-${dateObj.getMonth() + 1}-${dateObj.getFullYear()}`
+      return dateString;
+  }
+
   private getRocket(id: string): void {
     if (this.rocketSub) this.rocketSub.unsubscribe();
     this.rocketService.getById(id)
         .subscribe(
             res => { 
                 this.pageTitle = res.name;
-                this.subTitle = `First flight: ${moment(res.first_flight).format('MMMM Do YYYY')}`;
+                this.subTitle = `First flight: ${this.getDateString(res.first_flight)}`;
                 this.coverImage = res.id;
             },
             err => { console.log(err); }
@@ -68,7 +74,7 @@ export class AppComponent {
             res => {
                 console.log(res[0]);
                 this.pageTitle = `Launch number: ${res[0].flight_number}`;
-                this.subTitle = `Date of launch: ${moment(res[0].launch_date_utc).format('MMMM Do YYYY')}`;
+                this.subTitle = `Date of launch: ${this.getDateString(res.first_flight)}`;
             },
             err => { console.log(err); }
         );
