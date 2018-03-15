@@ -1,5 +1,37 @@
-<div class="row">
-    <div class="col-12">
-        Home
+<div class="col-12">
+    <div class="text-center w-100">
+        <h1 class="display-1">Hi there!</h1>
     </div>
+    <p class="mt-3 text-justify">
+        Welcome to SpaceX Monitor, one of my little side-projects.<br/>
+        It provides, or at least attempts to provide, a clean and easy to use web-interface for the data provided by <a href="https://github.com/r-spacex/SpaceX-API">SpaceX API</a>.
+        Among the data is a list of all launches and launch vehicles the company SpaceX sends screaming through the atmosphere on daring adventures.
+    </p>
+    <p class="text-justify">
+        I started this project to try out a few new or new-to-me web technologies. For starters this is a Progressive Web App (PWA).
+        This means that upon loading, this app will cache itself using a smart little script called a 'service-worker'.<br/>
+        A PWA app can, in some cases, even be installed and used offline on a smartphone regardless its brand or operating system.<br/>
+        Holy cow, isn't that awesome?!<br/><br/>
+
+        Besides that, it also gave me a good reason to set-up HTTPS on my domain. Since a PWA <strong>always</strong> exclusively utilizes the HTTPS protocol.
+    </p>
+
+    <pre><a href="https://www.spacex.com/"><i class="fas fa-rocket"></i> SpaceX</a></pre>
+    <pre><a href="https://github.com/daftfox/spacex-monitor"><i class="fab fa-github"></i> SpaceX Monitor</a></pre>
+    <pre><a href="https://github.com/r-spacex/SpaceX-API"><i class="fab fa-github"></i> SpaceX API</a></pre>
+    <p class="mt-3 text-justify">
+        Special thanks to <a href="https://github.com/jakewmeyer">Jake Meyer</a> for his rapid replies and edits of the SpaceX API.
+    </p>
+</div>
+
+<div class="col-12 mt-5">
+    <div class="text-center">
+        <h1 class="display-2">What is SpaceX?</h1>
+    </div>
+    <p class="mt-3 text-justify">
+        Have you been living under a rock?!<br/>
+        SpaceX is the hottest thing in space exploration since July 21st 1969, especially since the founder, {{spacex?.founder}}, has launched his own car into a heliocentric orbit on the biggest rocket built to date on February the 6th 2018.<br/>
+        <strong>And then the damn thing landed itself!</strong><br/>
+        {{spacex?.summary}}
+    </p>
 </div>

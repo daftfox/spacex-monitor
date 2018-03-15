@@ -1,150 +1,146 @@
-<div class="row justify-content-center mb-3">
-    <div class="col-12">
-        <div class="row">
-            <div class="col-4">
-                <h2>Mission patch: </h2>
-                <img class="img-fluid rounded mt-3"
-                     *ngIf="launch"
-                     src="{{launch.links.mission_patch}}" />
-            </div>
-            <div class="col-8">
-                <div class="pl-3">
-                    <h2>General information:</h2>
-                    <table class="table"
-                           *ngIf="launch">
-                        <tbody>
-                            <tr>
-                                <td colspan="2">{{launch.details}}</td>
-                            </tr>
-                            <tr>
-                                <td>Success:</td>
-                                <td>
-                                    <i class="success fa"
-                                       [ngClass]="{'fa-check': launch.launch_success, 'fa-times': !launch.launch_success}">
-                                    </i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Rocket:
-                                </td>
-                                <td>
-                                    <a [routerLink]="['/craft', 'rockets', launch.rocket.rocket_id]">
-                                        {{launch.rocket.rocket_name}}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr *ngIf="launch.telemetry.flight_club">
-                                <td>Telemetry:</td>
-                                <td>
-                                    <a [href]="launch.telemetry.flight_club">
-                                        Flight club
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Launch site:</td>
-                                <td>
-                                    <div class="mb-2">{{launch.launch_site.site_name_long}}</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan=2>
-                                    <agm-map class="w-100"
-                                             *ngIf="launchpad"
-                                             [latitude]="launchpad.location.latitude"
-                                             [longitude]="launchpad.location.longitude"
-                                             [zoom]="16"
-                                             [draggable]="false"
-                                             [mapTypeId]="'satellite'">
-                                        <agm-marker [latitude]="launchpad.location.latitude"
-                                                    [longitude]="launchpad.location.longitude">
-                                                    <agm-info-window [isOpen]="true">
-                                                        <strong>{{launchpad.location.name}}</strong>
-                                                        <br/>
-                                                        <span>Rockets launched:</span>
-                                                        <ul>
-                                                            <li *ngFor="let rocket of launchpad.vehicles_launched">
-                                                                {{rocket}}
-                                                            </li>
-                                                        </ul>
-                                                        <span>{{launchpad.details}}</span>
-                                                    </agm-info-window>
-                                        </agm-marker>
-                                    </agm-map>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<div class="col-12 p-0">
+    <div class="row pl-2 pr-2">
+        <div class="col-4">
+            <h2>Mission patch: </h2>
+            <img class="img-fluid rounded mt-3"
+                    *ngIf="launch"
+                    src="{{launch.links.mission_patch}}" />
         </div>
-        <hr>
-        <div class="row mt-3">
-            <div class="col-6">
-                <h2>First stage:</h2>
+        <div class="col-8">
+            <div class="pl-3">
+                <h2>General information:</h2>
                 <table class="table"
-                       *ngIf="launch">
-                    <thead class="thead-inverse">
-                        <th>Serial</th>
-                        <th>Block</th>
-                        <th>Flight #</th>
-                        <th>Successful landing</th>
-                        <th>Reused</th>
-                    </thead>
+                        *ngIf="launch">
                     <tbody>
-                        <tr *ngFor="let core of launch.rocket.first_stage.cores">
+                        <tr>
+                            <td colspan="2">{{launch.details}}</td>
+                        </tr>
+                        <tr>
+                            <td>Success:</td>
                             <td>
-                                <a [routerLink]="['/cores', core.core_serial]">{{core.core_serial}}</a>
-                            </td>
-                            <td>{{core.block}}</td>
-                            <td>{{core.flight}}</td>
-                            <td>
-                                <i class="success fa"
-                                    [ngClass]="{'fa-check': core.land_success, 'fa-times': !core.land_success}">
-                                 </i>
-                            </td>
-                            <td>
-                                <i class="success fa"
-                                    [ngClass]="{'fa-check': core.reused, 'fa-times': !core.reused}">
-                                    </i>
+                                <i class="success fas"
+                                    [ngClass]="{'fa-check': launch.launch_success, 'fa-times': !launch.launch_success}">
+                                </i>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-6">
-                <h2>Second stage:</h2>
-                <table class="table"
-                       *ngIf="launch">
-                    <thead class="thead-inverse">
-                        <th>Id</th>
-                        <th>Type</th>
-                        <th>Mass</th>
-                        <th>Destination</th>
-                        <th>Customers</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let payload of launch.rocket.second_stage.payloads">
-                            <td>{{payload.payload_id}}</td>
-                            <td>{{payload.payload_type}}</td>
+                        <tr>
                             <td>
-                                {{payload.mass_kg || 'Unknown'}}
-                                <span *ngIf="payload.mass_kg">kg</span></td>
-                            <td>{{payload.orbit}}</td>
+                                Rocket:
+                            </td>
                             <td>
-                                <div *ngFor="let customer of payload.customers">{{customer}}</div>
+                                <a [routerLink]="['/craft', 'rockets', launch.rocket.rocket_id]">
+                                    {{launch.rocket.rocket_name}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="launch.telemetry.flight_club">
+                            <td>Telemetry:</td>
+                            <td>
+                                <a [href]="launch.telemetry.flight_club">
+                                    Flight club
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Launch site:</td>
+                            <td>
+                                <div class="mb-2">{{launch.launch_site.site_name_long}}</div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="row mt-3 justify-content-centerS">
-            <div class="col-6">
-                <div [innerHtml]="iframe_html"></div>
-            </div>
+        <agm-map class="mt-4 w-100"
+                 *ngIf="launchpad"
+                 [latitude]="launchpad.location.latitude"
+                 [longitude]="launchpad.location.longitude"
+                 [zoom]="16"
+                 [draggable]="false"
+                 [mapTypeId]="'satellite'">
+            <agm-marker [latitude]="launchpad.location.latitude"
+                        [longitude]="launchpad.location.longitude">
+                        <agm-info-window [isOpen]="true">
+                            <strong>{{launchpad.location.name}}</strong>
+                            <br/>
+                            <span>Rockets launched:</span>
+                            <ul>
+                                <li *ngFor="let rocket of launchpad.vehicles_launched">
+                                    {{rocket}}
+                                </li>
+                            </ul>
+                            <span>{{launchpad.details}}</span>
+                        </agm-info-window>
+            </agm-marker>
+        </agm-map>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-12 col-lg-6">
+            <h2 class="pl-2 pr-2">First stage:</h2>
+            <table class="table"
+                    *ngIf="launch">
+                <thead class="thead-inverse">
+                    <th>Serial</th>
+                    <th>Block</th>
+                    <th>Flight</th>
+                    <th>Landed</th>
+                    <th>Reused</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let core of launch.rocket.first_stage.cores">
+                        <td>
+                            <a [routerLink]="['/cores', core.core_serial]">{{core.core_serial}}</a>
+                        </td>
+                        <td>{{core.block}}</td>
+                        <td>{{core.flight | cardinal}}</td>
+                        <td>
+                            <i class="success fas"
+                                [ngClass]="{'fa-check': core.land_success, 'fa-times': !core.land_success}">
+                            </i>
+                        </td>
+                        <td>
+                            <i class="success fas"
+                                [ngClass]="{'fa-check': core.reused, 'fa-times': !core.reused}">
+                            </i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h2 class="pl-2 pr-2">Second stage:</h2>
+            <table class="table"
+                    *ngIf="launch">
+                <thead class="thead-inverse">
+                    <th>Id</th>
+                    <th class="hidden-sm-down">Type</th>
+                    <th>Mass</th>
+                    <th>Orbit</th>
+                    <th>Customers</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let payload of launch.rocket.second_stage.payloads">
+                        <td>{{payload.payload_id}}</td>
+                        <td class="hidden-sm-down">{{payload.payload_type}}</td>
+                        <td>
+                            {{payload.payload_mass_kg || '?'}}
+                            <span *ngIf="payload.payload_mass_kg">kg</span></td>
+                        <td>{{payload.orbit}}</td>
+                        <td>
+                            <div *ngFor="let customer of payload.customers">{{customer}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- launch video -->
+    <div class="row mt-3 justify-content-center no-gutters">
+        <div class="col-12 col-lg-6">
+            <div [innerHtml]="iframe_html"></div>
         </div>
     </div>
 </div>

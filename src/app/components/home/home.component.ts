@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InfoService } from '../../services/info.service';
 
 @Component({
     selector: 'home-component',
@@ -9,5 +10,14 @@ import { Component } from '@angular/core';
 })
 
 export class HomeComponent {
-    
+    spacex: any;
+    infoSub: any;
+
+    constructor(private infoService: InfoService) {
+        this.infoSub = this.infoService.getAll()
+            .subscribe(
+                res => this.spacex = res,
+                err => { console.log(err); }
+            );
+    }
 }

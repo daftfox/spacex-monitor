@@ -44,11 +44,6 @@ jobs:
               npm build
             fi
 
-      #- add_ssh_keys:
-      #      fingerprints:
-      #        - 0f:aa:30:da:01:a2:de:9d:1e:5c:96:19:b5:a9:5f:c9
-
-
       - deploy:
           name: Deploy master branch
           command: |

@@ -11,6 +11,7 @@ import { EmbedVideo } from 'ngx-embed-video';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { CraftComponent } from './components/craft/craft.component';
 import { LaunchesComponent } from './components/launches/launches.component';
@@ -29,8 +30,10 @@ import { LaunchpadService } from './services/launchpad.service';
 import { RocketService } from './services/rocket.service';
 import { CapsuleService } from './services/capsule.service';
 import { CoreService } from './services/core.service';
+import { InfoService } from './services/info.service';
 
 import { SafePipe } from './pipes/safe.pipe';
+import { CardinalPipe } from './pipes/cardinal.pipe';
 import { HttpsPipe } from './pipes/https.pipe';
 import { environment } from '../environments/environment';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -59,7 +62,7 @@ const routes: Routes = [
         data: {
           pageTitle: 'Cores', 
           subTitle: 'A list containing all rocket core components.',
-          cover_image: 'liftoff'
+          cover_image: 'cores'
         }
       },
       { 
@@ -68,7 +71,7 @@ const routes: Routes = [
         data: {
           pageTitle: 'cd', 
           subTitle: ' ',
-          cover_image: 'liftoff'
+          cover_image: 'cores'
         }
       }
     ]
@@ -142,8 +145,10 @@ const routes: Routes = [
   declarations: [
     SafePipe,
     HttpsPipe,
+    CardinalPipe,
     AppComponent,
     HeaderComponent,
+    FooterComponent,
     HomeComponent,
     LaunchesComponent,
     CraftComponent,
@@ -169,6 +174,7 @@ const routes: Routes = [
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
   ],
   providers: [
+    InfoService,
     LaunchService,
     LaunchpadService,
     RocketService,

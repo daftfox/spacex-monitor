@@ -21,7 +21,7 @@
 }
 
 .image-overlay .page-info {
-    padding: 2.3rem 0 0;
+    padding-top: 2.3rem;
 }
 
 .image-overlay .page-info .subtitle {
@@ -29,13 +29,15 @@
 }
 
 .cover-image {
-    height: 70vh;
-    transition: 1s;
+    width: 100%;
+    height: 85vh;
     background-size: cover;
+    background-position: 100% 100%;
 }
 
 .cover-image.mars{
     background-image: url('../assets/images/mars.jpg');
+    background-position: 50% 50%;
 }
 
 .cover-image.roadster{
@@ -43,7 +45,8 @@
 }
 
 .cover-image.liftoff{
-    background-image: url('../assets/images/falcon-heavy-launch-liftoff.jpg');
+    background-image: url('../assets/images/falconheavy-inflight.jpg');
+    background-position-y: 0;
 }
 
 .cover-image.landing{
@@ -55,9 +58,24 @@
 }
 
 .cover-image.falconheavy{
-    background-image: url('../assets/images/falconheavy-cover.jpg');
+    background-image: url('../assets/images/falconheavy-launchpad.jpg');
 }
 
 .cover-image.falcon1{
     background-image: url('../assets/images/falcon1-cover.jpg');
+}
+
+.cover-image.falcon9{
+    background-image: url('../assets/images/falcon9-cover.jpg');
+}
+
+.cover-image.cores{
+    background-image: url('../assets/images/cores-cover.jpg');
+}
+
+@media screen and (max-width: 992px) {
+    .page-info {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }

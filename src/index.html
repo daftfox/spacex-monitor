@@ -19,15 +19,49 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon.png">
   <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="./assets/icons/icon.png">
   <link rel="icon" type="image/png" href="assets/icons/icon.png">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+  <style>
+    .splash {
+      opacity: 0;
+      transition: opacity .8s ease-in-out;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      color: #333;
+      background: white;
+      z-index: -1;
+      text-align: center;
+      padding-top: 30vh;
+    }
+    /* .splash screen is visible when app is not bootstrapped yet, app-root is empty */
+    app-root:empty + .splash {
+        opacity: 1;
+        z-index: 100;
+    }
+    .splash img {
+      margin: 25px 0;
+    }
+    .spinner {
+      -webkit-animation:spin 4s linear infinite;
+      -moz-animation:spin 4s linear infinite;
+      animation:spin 4s linear infinite;
+    }
+    @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+    @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+    @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+  </style>
 </head>
 <body>
   <app-root></app-root>
 
   <div class="splash" id="content">
-    <img src="assets/icons/icon.png" width="192px" alt="SpaceX Monitor PWA logo" />
-    <h1>SpaceX Monitor PWA loading...</h1>
+    <img src="assets/icons/icon-black-500px.png" width="500px" alt="SpaceX Monitor logo" />
+    <h1>SpaceX Monitor loading...</h1>
+    <img class="spinner" src="assets/icons/spinner-100px.png" width="100px" alt="spinner" />
   </div>
 
   <noscript>
