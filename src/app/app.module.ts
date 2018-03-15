@@ -166,7 +166,7 @@ const routes: Routes = [
     HttpModule,
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(routes, {useHash: true}),
+    RouterModule.forRoot(routes, {useHash: false}),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDsCE5gAJnCw2LEBvCQRXWCn3ne-S5lZEw'
     }),
