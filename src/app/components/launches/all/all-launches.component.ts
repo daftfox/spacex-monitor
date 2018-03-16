@@ -48,7 +48,6 @@ export class AllLaunchesComponent {
 
     getLaunches(): void {
         if (this.launchSub) this.launchSub.unsubscribe();
-        console.log(this.filters);
         this.launchSub = this.launchService.getAll(this.filters)
             .subscribe(
                 res => this.launches = res,

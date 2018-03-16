@@ -36,41 +36,43 @@
 }
 
 .cover-image.mars{
-    background-image: url('../assets/images/webp/mars.webp');
+    background-image: url('assets/images/webp/mars.webp');
     background-position: 50% 50%;
 }
 
 .cover-image.roadster{
-    background-image: url('../assets/images/webp/roadster.webp');
+    background-image: url('assets/images/webp/roadster.webp');
 }
 
 .cover-image.liftoff{
-    background-image: url('../assets/images/webp/falconheavy-inflight.webp');
+    background-image: url('assets/images/webp/falconheavy-inflight.webp');
     background-position-y: 0;
 }
 
 .cover-image.landing{
-    background-image: url('../assets/images/webp/falcon-heavy-launch-boosters-landing.webp');
+    background-image: url('assets/images/webp/falcon-heavy-launch-boosters-landing.webp');
 }
 
 .cover-image.capsule{
-    background-image: url('../assets/images/webp/dragon-v2-interior.webp');
+    background-image: url('assets/images/webp/dragon-v2-interior.webp');
 }
 
 .cover-image.falconheavy{
-    background-image: url('../assets/images/webp/falconheavy-launchpad.webp');
+    background-image: url('assets/images/webp/falconheavy-launchpad.webp');
 }
 
 .cover-image.falcon1{
-    background-image: url('../assets/images/webp/falcon1-cover.webp');
+    background-image: url('assets/images/webp/falcon1-cover.webp');
+    background-position: 50% 100%;
 }
 
 .cover-image.falcon9{
-    background-image: url('../assets/images/webp/falcon9-cover.webp');
+    background-image: url('assets/images/webp/falcon9-cover.webp');
+    background-position: 50% 0%;
 }
 
 .cover-image.cores{
-    background-image: url('../assets/images/webp/cores-cover.webp');
+    background-image: url('assets/images/webp/cores-cover.webp');
 }
 
 @media screen and (max-width: 992px) {

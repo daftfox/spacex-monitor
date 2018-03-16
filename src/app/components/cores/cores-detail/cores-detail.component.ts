@@ -1,9 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CoreService } from '../../../services/core.service';
-import { LaunchpadService } from '../../../services/launchpad.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observer } from 'rxjs/Observer';
-import { URLSearchParams } from '@angular/http';
 
 @Component({
     selector: 'cores-detail-component',

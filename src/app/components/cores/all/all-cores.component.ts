@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CoreService } from '../../../services/core.service';
 import { Observer } from 'rxjs/Observer';
-import { URLSearchParams } from '@angular/http';
 
 @Component({
     selector: 'all-cores-component',

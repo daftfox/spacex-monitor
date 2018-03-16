@@ -1,9 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { LaunchService } from '../../../services/launch.service';
 import { LaunchpadService } from '../../../services/launchpad.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observer } from 'rxjs/Observer';
-import { URLSearchParams } from '@angular/http';
 import { EmbedVideoService } from 'ngx-embed-video';
 
 @Component({
