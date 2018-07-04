@@ -7,16 +7,14 @@
     "resources": {
       "files": [
         "/assets/images/icons/icon.png",
+        "/*.bundle.css",
+        "/*.bundle.js",
+        "/*.chunk.js",
         "/index.html"
       ],
       "urls": [
         "https://use.fontawesome.com/releases/**",
         "https://maxcdn.bootstrapcdn.com/bootstrap/**"
-      ],
-      "versionedFiles": [
-        "/*.bundle.css",
-        "/*.bundle.js",
-        "/*.chunk.js"
       ]
     }
   }, {

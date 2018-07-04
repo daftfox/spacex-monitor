@@ -1,0 +1,134 @@
+<div class="col-12">
+    <div class="row">
+        <div class="col-4">
+            <img class="img-fluid rounded"
+                    *ngIf="rocket"
+                    src="assets/images/webp/{{rocket.id}}-500px.webp" />
+        </div>
+        <div class="col-8">
+            <div class="pl-3">
+                <h2>General information:</h2>
+                <table class="table"
+                        *ngIf="rocket">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">{{rocket.description}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>Mass:</div>
+                                <div>Diameter:</div>
+                                <div>Height:</div>
+                            </td>
+                            <td>
+                                <div>{{rocket.mass.kg}}kg</div>
+                                <div>{{rocket.diameter.meters}}m</div>
+                                <div>{{rocket.height.meters}}m</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>Number of stages:</div>
+                                <div>Number of boosters:</div>
+                            </td>
+                            <td>
+                                <div>{{rocket.stages}}</div>
+                                <div>{{rocket.boosters}}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Reusable:</td>
+                            <td>
+                                <i class="success fa"
+                                    [ngClass]="{'fa-check': rocket.firstStage.reusable, 'fa-times': !rocket.firstStage.reusable}">
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Success rate:</td>
+                            <td>{{rocket.successRate}}%</td>
+                        </tr>
+                        <tr>
+                            <td>Cost per launch:</td>
+                            <td>${{rocket.costPerLaunch}}</td>
+                        </tr>
+                        <tr>
+                            <td>In use today:</td>
+                            <td>
+                                <i class="success fa"
+                                    [ngClass]="{'fa-check': rocket.active, 'fa-times': !rocket.active}">
+                                </i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-3">
+        <div class="col-4">
+            <h2>Payload weights:</h2>
+            <table class="table"
+                    *ngIf="rocket">
+                <thead class="thead-inverse">
+                    <th>Destination</th>
+                    <th>Payload mass</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pw of rocket.payloadWeights">
+                        <td>{{pw.name}}</td>
+                        <td>{{pw.kg}}kg</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-8">
+            <h2>Engines:</h2>
+            <div class="row"
+                    *ngIf="rocket">
+                <div class="col-8">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Type:</td>
+                                <td>{{rocket.engines.type}} {{rocket.engines.version}}</td>
+                            </tr>
+                            <tr>
+                                <td>Number of engines:</td>
+                                <td>{{rocket.engines.numberOfEngines}}</td>
+                            </tr>
+                            <tr>
+                                <td>Propellants:</td>
+                                <td>
+                                    <div>{{rocket.engines.propellantOne}}</div>
+                                    <div>{{rocket.engines.propellantTwo}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Max engine loss:</td>
+                                <td>{{rocket.engines.maxEngineLoss}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>Thrust at sea level:</div>
+                                    <div>Thrust in vacuum:</div>
+                                    <div>Thrust to weight:</div>
+                                </td>
+                                <td>
+                                    <div>{{rocket.engines.thrustSeaLevel.kN}}kN</div>
+                                    <div>{{rocket.engines.thrustVacuum.kN}}kN</div>
+                                    <div>{{rocket.engines.thrustToWeight}}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4">
+                    <img src="assets/images/{{rocket.engines.type}}{{rocket.engines.version}}.jpg"
+                            class="rounded img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

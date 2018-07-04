@@ -1,138 +1,137 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { ServiceWorkerModule } from '@angular/service-worker'
+import { HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AgmCoreModule } from '@agm/core';
-import { EmbedVideo } from 'ngx-embed-video';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './components/home/home.component';
-import { CraftComponent } from './components/craft/craft.component';
-import { LaunchesComponent } from './components/launches/launches.component';
-import { RocketsComponent } from './components/craft/rockets/rockets.component';
-import { RocketsDetailComponent } from './components/craft/rockets/rockets-detail/rockets-detail.component';
-import { CapsulesComponent } from './components/craft/capsules/capsules.component';
-import { AllCraftComponent } from './components/craft/all/all-craft.component';
-import { AllLaunchesComponent } from './components/launches/all/all-launches.component';
-import { LaunchesDetailComponent } from './components/launches/launches-detail/launches-detail.component';
-import { CoresComponent } from './components/cores/cores.component';
-import { AllCoresComponent } from './components/cores/all/all-cores.component';
-import { CoresDetailComponent } from './components/cores/cores-detail/cores-detail.component';
+import { HeaderComponent } from './component/header/header.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { HomeComponent } from './component/home/home.component';
+import { CraftComponent } from './component/craft/craft.component';
+import { LaunchesComponent } from './component/launches/launches.component';
+import { RocketsComponent } from './component/craft/rockets/rockets.component';
+import { RocketsDetailComponent } from './component/craft/rockets/rockets-detail/rockets-detail.component';
+import { CapsulesComponent } from './component/craft/capsules/capsules.component';
+import { AllCraftComponent } from './component/craft/all/all-craft.component';
+import { AllLaunchesComponent } from './component/launches/all/all-launches.component';
+import { LaunchesDetailComponent } from './component/launches/launches-detail/launches-detail.component';
+import { CoresComponent } from './component/cores/cores.component';
+import { AllCoresComponent } from './component/cores/all/all-cores.component';
+import { CoresDetailComponent } from './component/cores/cores-detail/cores-detail.component';
 
-import { LaunchService } from './services/launch.service';
-import { LaunchpadService } from './services/launchpad.service';
-import { RocketService } from './services/rocket.service';
-import { CapsuleService } from './services/capsule.service';
-import { CoreService } from './services/core.service';
-import { InfoService } from './services/info.service';
+import { LaunchService } from './service/launch.service';
+import { LaunchpadService } from './service/launchpad.service';
+import { RocketService } from './service/rocket.service';
+import { CapsuleService } from './service/capsule.service';
+import { CoreService } from './service/core.service';
+import { InfoService } from './service/info.service';
 
-import { SafePipe } from './pipes/safe.pipe';
-import { CardinalPipe } from './pipes/cardinal.pipe';
-import { HttpsPipe } from './pipes/https.pipe';
+import { SafePipe } from './pipe/safe.pipe';
+import { CardinalPipe } from './pipe/cardinal.pipe';
+import { HttpsPipe } from './pipe/https.pipe';
 import { environment } from '../environments/environment';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 const routes: Routes = [
-  { 
-    path: '', 
-    redirectTo: 'home', 
+  {
+    path: '',
+    redirectTo: 'home',
     pathMatch: 'full'
-  }, { 
-    path: 'home', 
-    component: HomeComponent, 
+  }, {
+    path: 'home',
+    component: HomeComponent,
     data: {
-      pageTitle: 'Home', 
+      pageTitle: 'Home',
       subTitle: 'About this app and SpaceX.',
       cover_image: 'mars'
-    } 
-  }, { 
-    path: 'cores', 
-    component: CoresComponent, 
+    }
+  }, {
+    path: 'cores',
+    component: CoresComponent,
     children: [
       { path: '', redirectTo: 'all', pathMatch: 'full' },
-      { 
-        path: 'all', 
+      {
+        path: 'all',
         component: AllCoresComponent,
         data: {
-          pageTitle: 'Cores', 
+          pageTitle: 'Cores',
           subTitle: 'A list containing all rocket core components.',
           cover_image: 'cores'
         }
       },
-      { 
-        path: ':id', 
+      {
+        path: ':id',
         component: CoresDetailComponent,
         data: {
-          pageTitle: 'cd', 
+          pageTitle: 'cd',
           subTitle: ' ',
           cover_image: 'cores'
         }
       }
     ]
-  }, { 
-    path: 'launches', 
-    component: LaunchesComponent, 
+  }, {
+    path: 'launches',
+    component: LaunchesComponent,
     children: [
       { path: '', redirectTo: 'all', pathMatch: 'full' },
-      { 
-        path: 'all', 
+      {
+        path: 'all',
         component: AllLaunchesComponent,
         data: {
-          pageTitle: 'Launches', 
+          pageTitle: 'Launches',
           subTitle: 'A list containing all launches SpaceX has performed and will perform.',
           cover_image: 'liftoff'
         }
       },
-      { 
-        path: ':id', 
+      {
+        path: ':id',
         component: LaunchesDetailComponent,
         data: {
-          pageTitle: 'ld', 
+          pageTitle: 'ld',
           subTitle: ' ',
           cover_image: 'liftoff'
         }
       }
     ]
-  }, { 
-    path: 'craft', 
+  }, {
+    path: 'craft',
     component: CraftComponent,
     children: [
       { path: '', redirectTo: 'all', pathMatch: 'full' },
-      { 
-        path: 'all', 
+      {
+        path: 'all',
         component: AllCraftComponent,
         data: {
-          pageTitle: 'Craft', 
+          pageTitle: 'Craft',
           subTitle: 'Craft designed and produced by SpaceX.',
           cover_image: 'roadster'
         }
-      },{ 
-        path: 'rockets', 
+      },{
+        path: 'rockets',
         component: RocketsComponent,
         data: {
-          pageTitle: 'Rockets', 
+          pageTitle: 'Rockets',
           subTitle: 'Detailed information regarding all SpaceX rockets.',
           cover_image: 'landing'
         }
-      },{ 
-        path: 'rockets/:id', 
+      },{
+        path: 'rockets/:id',
         component: RocketsDetailComponent,
         data: {
-          pageTitle: 'rd', 
+          pageTitle: 'rd',
           subTitle: ' ',
           cover_image: ' '
         }
-      },{ 
-        path: 'capsules', 
+      },{
+        path: 'capsules',
         component: CapsulesComponent,
         data: {
-          pageTitle: 'Capsules', 
+          pageTitle: 'Capsules',
           subTitle: 'Detailed information regarding all SpaceX capsules.',
           cover_image: 'capsule'
         }
@@ -163,14 +162,13 @@ const routes: Routes = [
     CoresDetailComponent
   ],
   imports: [
-    HttpModule,
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes, {useHash: false}),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDsCE5gAJnCw2LEBvCQRXWCn3ne-S5lZEw'
     }),
-    EmbedVideo.forRoot(),
     environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
   ],
   providers: [
