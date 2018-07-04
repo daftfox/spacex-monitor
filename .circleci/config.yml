@@ -2,27 +2,27 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:7.10
+      - image: circleci/node:8.11.3
         environment:
           DEPLOY_HOST: 139.162.179.147
     steps:
       - checkout
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
+#      - restore_cache:
+#          keys:
+#          - v1-dependencies-{{ checksum "package.json" }}
+#          # fallback to using the latest cache if no exact match is found
+#          - v1-dependencies-
+#
       - run:
           command: npm install
           name: Installing Dependencies
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+#
+#      - save_cache:
+#          paths:
+#            - node_modules
+#          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: Running build script for master branch
@@ -51,19 +51,15 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]
             then
-              chmod u+x ./deployments/build_prod.sh
-              npm run build-prod
-              sudo apt install rsync=3.1.1-3
-              ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
+              chmod u+x ./deployments/deploy_prod.sh
+              ./deployments/deploy_prod.sh
             fi
 
       - deploy:
-          name: Deploy master branch
+          name: Deploy develop branch
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]
+            if [ "${CIRCLE_BRANCH}" == "develop" ]
             then
-              chmod u+x ./deployments/build_prod.sh
-              npm run build-prod
-              sudo apt install rsync=3.1.1-3
-              ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
+              chmod u+x ./deployments/deploy_prod.sh
+              ./deployments/deploy_prod.sh
             fi
