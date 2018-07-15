@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CoreService } from '../../../service/core.service';
 import { ActivatedRoute } from '@angular/router';
+import {CoreDetails} from '../../../model/domain/core-details.model';
 
 @Component({
     selector: 'cores-detail-component',
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class CoresDetailComponent {
     id: string;
-    core: any;
+    core: CoreDetails;
 
     coreSub: any;
     routeSub: any;
@@ -27,11 +28,11 @@ export class CoresDetailComponent {
     }
 
     private getCore(): void {
-        if (this.coreSub) { this.coreSub.unsubscribe() };
+        if (this.coreSub) { this.coreSub.unsubscribe(); };
         this.coreService.getById(this.id)
             .subscribe(
-                res => {
-                    this.core = res[0];
+              (core: CoreDetails) => {
+                    this.core = core;
                 },
                 err => { console.log(err); }
             );

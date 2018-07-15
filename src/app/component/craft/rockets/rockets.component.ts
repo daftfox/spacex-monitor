@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RocketService } from '../../../service/rocket.service';
 import { Rocket } from '../../../model/domain/rocket.model';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'rockets-component',
@@ -10,21 +11,16 @@ import { Rocket } from '../../../model/domain/rocket.model';
     ]
 })
 
-export class RocketsComponent {
-    rockets: Array<any>;
-
-    rocketSub: any;
+export class RocketsComponent implements OnInit {
+    rockets: Observable<Rocket[]>;
 
     constructor(private rocketService: RocketService) {
-        this.getRockets();
+      this.rockets = this.rocketService.get();
     }
 
-    private getRockets(): void {
-        if (this.rocketSub) { this.rocketSub.unsubscribe(); }
-        this.rocketService.get()
-            .subscribe(
-              ( rockets: Rocket[] ) => this.rockets = rockets,
-                err => { console.log(err); }
-            );
+    ngOnInit() {
+      setTimeout(() => {
+        this.rocketService.refresh();
+      });
     }
 }

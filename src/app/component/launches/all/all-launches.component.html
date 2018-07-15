@@ -14,7 +14,7 @@
                                         name="successful"
                                         type="radio"
                                         [value]="null"
-                                        (change)="getLaunches()"
+                                        (change)="refreshLaunches()"
                                         [(ngModel)]="filters.launch_success" />
                                 Show all launches
                             </label>
@@ -25,7 +25,7 @@
                                         name="successful"
                                         type="radio"
                                         [value]="true"
-                                        (change)="getLaunches()"
+                                        (change)="refreshLaunches()"
                                         [(ngModel)]="filters.launch_success" />
                                 Show successful launches
                             </label>
@@ -36,7 +36,7 @@
                                         name="successful"
                                         type="radio"
                                         [value]="false"
-                                        (change)="getLaunches()"
+                                        (change)="refreshLaunches()"
                                         [(ngModel)]="filters.launch_success" />
                                 Show failed launches
                             </label>
@@ -52,19 +52,19 @@
                                         name="launchpad"
                                         type="radio"
                                         [value]="null"
-                                        (change)="getLaunches()"
+                                        (change)="refreshLaunches()"
                                         [(ngModel)]="filters.rocket_id" />
                                 All
                             </label>
                         </div>
-                        <div *ngFor="let rocket of rockets"
+                        <div *ngFor="let rocket of rockets | async"
                                 class="col-4 col-lg-12 form-check">
                             <label class="form-check-label">
                                 <input class="form-check-input"
                                         name="launchpad"
                                         type="radio"
                                         [value]="rocket.id"
-                                        (change)="getLaunches()"
+                                        (change)="refreshLaunches()"
                                         [(ngModel)]="filters.rocket_id" />
                                 {{rocket.name}}
                             </label>
@@ -80,19 +80,19 @@
                                         name="launchpad"
                                         type="radio"
                                         [value]="null"
-                                        (change)="getLaunches()"
+                                        (change)="refreshLaunches()"
                                         [(ngModel)]="filters.site_id" />
                                 All
                             </label>
                         </div>
-                        <div *ngFor="let launchpad of launchpads"
+                        <div *ngFor="let launchpad of launchpads | async"
                                 class="col-4 col-lg-12 form-check">
                             <label class="form-check-label">
                                 <input class="form-check-input"
                                         name="launchpad"
                                         type="radio"
                                         [value]="launchpad.id"
-                                        (change)="getLaunches()"
+                                        (change)="refreshLaunches()"
                                         [(ngModel)]="filters.site_id" />
                                 {{launchpad.fullName}}
                             </label>
@@ -107,9 +107,9 @@
                     <table class="table">
                         <thead class="thead-inverse">
                             <tr>
-                                <th class="w1rem">Flight number</th>
+                                <th class="">Flight num.</th>
                                 <th>Mission patch</th>
-                                <th>Rocket</th>
+                                <th class="hidden-sm-down">Rocket</th>
                                 <th class="hidden-sm-down">Reusability</th>
                                 <th>Success</th>
                                 <th class="hidden-sm-down"
@@ -118,10 +118,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let launch of launches">
+                            <tr *ngFor="let launch of launches | async">
                                 <th valign="middle"
                                     scope="row"
-                                    class="w1rem">
+                                    class="">
                                     <a [routerLink]="['../'+launch.flightNumber]">
                                         {{launch.flightNumber}}
                                     </a>
@@ -131,7 +131,7 @@
                                           class="img-fluid"
                                           src="{{launch.links.missionPatch | https}}"/>
                                 </td>
-                                <td valign="middle">
+                                <td class="hidden-sm-down" valign="middle">
                                     <a [routerLink]="['/craft','rockets', launch.rocket.id]">{{launch.rocket.name}}</a>
                                 </td>
                                 <td class="hidden-sm-down"

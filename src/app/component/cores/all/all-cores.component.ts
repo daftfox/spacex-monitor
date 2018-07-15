@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CoreService } from '../../../service/core.service';
-import { Core } from '../../../model/domain/core.model';
+import {CoreDetails} from '../../../model/domain/core-details.model';
 
 @Component({
     selector: 'all-cores-component',
@@ -11,7 +11,7 @@ import { Core } from '../../../model/domain/core.model';
 })
 
 export class AllCoresComponent {
-    cores: Array<any>;
+    cores: Array<CoreDetails>;
 
     coreSub: any;
 
@@ -23,7 +23,7 @@ export class AllCoresComponent {
         if (this.coreSub) { this.coreSub.unsubscribe(); }
         this.coreService.get()
             .subscribe(
-              ( cores: Core[] ) => this.cores = cores,
+              ( cores: CoreDetails[] ) => this.cores = cores,
                 err => { console.log(err); }
             );
     }

@@ -11,10 +11,10 @@
 <div class="container-fluid p-0">
   <div class="page row justify-content-center no-gutters">
     <div class="gradient"></div>
-    <div class="col-12" [ngClass]="{'col-lg-6': pageTitle === 'Home', 'col-lg-12': pageTitle !== 'Home'}">
+    <div class="col" [ngClass]="{'col-lg-6': pageTitle === 'Home', 'col-lg-12': pageTitle !== 'Home'}">
       <router-outlet></router-outlet>
     </div>
-    <div class="col-12 col-lg-10">
+    <div class="col-10">
         <spacex-footer></spacex-footer>
     </div>
   </div>

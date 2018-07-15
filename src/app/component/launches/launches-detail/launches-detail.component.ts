@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Launch } from '../../../model/domain/launch.model';
 import { Launchpad } from '../../../model/domain/launch-pad.model';
 import { Subscription } from 'rxjs/internal/Subscription';
+import {Observable} from 'rxjs/internal/Observable';
 // import { EmbedVideoService } from 'ngx-embed-video';
 
 @Component({
@@ -19,11 +20,9 @@ export class LaunchesDetailComponent {
     iframe_html: any;
 
     id: string;
-    launch: Launch;
-    launchpad: Launchpad;
+    launch: Observable<Launch>;
+    launchpad: Observable<Launchpad>;
 
-    launchSub: Subscription;
-    launchpadSub: Subscription;
     routeSub: Subscription;
     videoQuery = {
         query: {
@@ -40,35 +39,35 @@ export class LaunchesDetailComponent {
                 private launchpadService: LaunchpadService,
                 // private embedService: EmbedVideoService,
                 private route: ActivatedRoute) {
-
+        this.launch = this.launchService.getById();
+        this.launchpad = this.launchpadService.getById();
         this.routeSub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.getRocket();
+            this.launchService.refreshById( this.id );
         });
     }
 
-    private getRocket(): void {
-        if (this.launchSub) { this.launchSub.unsubscribe(); }
-        this.launchSub = this.launchService.getById(this.id)
-            .subscribe(
-              ( launch: Launch ) => {
-                    this.launch = launch;
-                    console.log(this.launch);
-                    // this.iframe_html = this.embedService.embed(this.launch.links.video_link, this.videoQuery);
-                    this.getLaunchpad(launch.launchSite.id);
-                },
-                err => { console.log(err); }
-            );
-    }
+    // private getLaunch(): void {
+    //     if (this.launchSub) { this.launchSub.unsubscribe(); }
+    //     this.launchSub = this.launchService.getById(this.id)
+    //         .subscribe(
+    //           ( launch: Launch ) => {
+    //                 this.launch = launch;
+    //                 // this.iframe_html = this.embedService.embed(this.launch.links.video_link, this.videoQuery);
+    //                 this.getLaunchpad(launch.launchSite.id);
+    //             },
+    //             err => { console.log(err); }
+    //         );
+    // }
 
-    private getLaunchpad(id: string): void {
-        if (this.launchpadSub) { this.launchpadSub.unsubscribe(); }
-        this.launchpadSub = this.launchpadService.getById(id)
-            .subscribe(
-                res => {
-                    this.launchpad = res;
-                },
-                err => { console.log(err); }
-            );
-    }
+    // private getLaunchpad(id: string): void {
+    //     if (this.launchpadSub) { this.launchpadSub.unsubscribe(); }
+    //     this.launchpadSub = this.launchpadService.getById(id)
+    //         .subscribe(
+    //             res => {
+    //                 this.launchpad = res;
+    //             },
+    //             err => { console.log(err); }
+    //         );
+    // }
 }

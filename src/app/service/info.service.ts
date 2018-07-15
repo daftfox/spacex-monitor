@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
-import {Any} from 'json2typescript';
+import {SpacexInfo} from '../model/domain/spacex-info.model';
 
 
 /**
@@ -11,10 +11,10 @@ import {Any} from 'json2typescript';
  * @param Http injectable provided by angular for making http calls
  */
 @Injectable()
-export class InfoService extends ApiService<any> {
+export class InfoService extends ApiService<SpacexInfo> {
 
   constructor( private httpClient: HttpClient ) {
-    super(httpClient, Any);
+    super(httpClient, SpacexInfo);
     this.API_BASE_URL = `${ this.API_BASE_URL }/info`;
   }
 }

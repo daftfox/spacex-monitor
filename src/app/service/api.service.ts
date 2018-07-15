@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Injectable, Type } from '@angular/core';
+import { Type } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry, map } from 'rxjs/operators';
+import {catchError, retry, map, switchMap, debounceTime} from 'rxjs/operators';
 import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
 import { environment } from '../../environments/environment';
+import {Subject} from 'rxjs/internal/Subject';
 
 /**
  * @name ApiService
@@ -13,11 +14,14 @@ import { environment } from '../../environments/environment';
  */
 export class ApiService<T> {
   protected API_BASE_URL = environment.API_URL;
-
   protected jsonConvert: JsonConvert;
 
+  getSubject = new Subject<any>();
+  getByIdSubject = new Subject<string>();
+
+
   constructor(protected http: HttpClient,
-              private type: any) {
+              private type: Type<T>) {
     this.jsonConvert = new JsonConvert();
     // this.jsonConvert.operationMode = OperationMode.LOGGING;
     this.jsonConvert.ignorePrimitiveChecks = false;
@@ -25,30 +29,33 @@ export class ApiService<T> {
   }
 
   // get all elements
-  public get( params?: any ): Observable<T[]> {
-    return this.http.get<T[]>( `${this.API_BASE_URL}`, this.getHttpOptions( params ) )
-      .pipe(
-        map( ( response ) =>  {
-          // console.log(response);
-          // if ( !this.type ) {
-          //   return response;
-          // } else {
-            return this.jsonConvert.deserializeArray( response,  this.type );
-          // }
-        } ),
-        retry(3),
-        catchError( this.handleError )
-      );
+  public get(): Observable<T[]> {
+    return this.getSubject.pipe(
+      debounceTime( 500 ),
+      switchMap( params => this.http.get<T[]>( `${this.API_BASE_URL}`, this.getHttpOptions( params ) ) ),
+      map( response => this.jsonConvert.deserialize( response, this.type ) ),
+      retry( 3 ),
+      catchError( this.handleError )
+    );
+  }
+
+  public refresh( params?: any ) {
+    this.getSubject.next( params );
   }
 
   // get element by id
-  public getById( id: string, params?: any ): Observable<T> {
-    return this.http.get<T>( `${this.API_BASE_URL}/${id}`, this.getHttpOptions( params ) )
-      .pipe(
-        map( response => this.jsonConvert.deserialize( response,  this.type ) ),
-        retry(3),
-        catchError( this.handleError )
-      );
+  public getById(): Observable<T> {
+    return this.getByIdSubject.pipe(
+      debounceTime( 500 ),
+      switchMap( id => this.http.get<T[]>( `${this.API_BASE_URL}/${id}`, this.getHttpOptions( ) ) ),
+      map( response => this.jsonConvert.deserialize( response, this.type ) ),
+      retry( 3 ),
+      catchError( this.handleError )
+    );
+  }
+
+  public refreshById( id: string ) {
+    this.getByIdSubject.next( id );
   }
 
   public create( body: T, params?: any ): Observable<{}> { // todo: add better typing based on backend response

@@ -1,192 +1,194 @@
-<div class="row">
-    <div class="col-2">
+<div class="col-12">
+  <div class="row">
+    <!--<div class="col-2">
         <div class="row no-gutters">
             <div class="col-12">
-                <strong>Filters:</strong>
+                <strong>Filters:</strong>-->
 
-                <!-- succesful launch -->
-                <!-- <div class="row mt-3">
-                    <div class="mt-3">Successful: </div>
-                    <div class="col-12 form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" 
-                                    name="successful"
-                                    type="radio" 
-                                    [value]="null"
-                                    (change)="getLaunches()"
-                                    [(ngModel)]="filters.successful" />
-                            Show all launches
-                        </label>
-                    </div>
-                    <div class="col-12 form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" 
-                                    name="successful" 
-                                    type="radio" 
-                                    [value]="true"
-                                    (change)="getLaunches()"
-                                    [(ngModel)]="filters.successful" />
-                            Show successful launches
-                        </label>
-                    </div>
-                    <div class="col-12 form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" 
-                                    name="successful"
-                                    type="radio" 
-                                    [value]="false"
-                                    (change)="getLaunches()"
-                                    [(ngModel)]="filters.successful" />
-                            Show failed launches
-                        </label>
-                    </div>
-                </div>
-
-                -- rocket type --
-                <div class="row mt-3">
-                    <div class="mt-3">Rocket: </div>
-                    <div class="col-12 form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" 
-                                    name="launchpad" 
-                                    type="radio" 
-                                    [value]="null"
-                                    (change)="getLaunches()"
-                                    [(ngModel)]="filters.selectedRocket" />
-                            All
-                        </label>
-                    </div>
-                    <div *ngFor="let rocket of rockets"
-                            class="col-12 form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" 
-                                    name="launchpad" 
-                                    type="radio" 
-                                    [value]="rocket.id"
-                                    (change)="getLaunches()"
-                                    [(ngModel)]="filters.selectedRocket" />
-                            {{rocket.name}}
-                        </label>
-                    </div>
-                </div>
-
-                -- sites --
-                <div class="row mt-3">
-                    <div class="mt-3">Launch site: </div>
-                    <div class="col-12 form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" 
-                                    name="launchpad" 
-                                    type="radio" 
-                                    [value]="null"
-                                    (change)="getLaunches()"
-                                    [(ngModel)]="filters.selectedLaunchpad" />
-                            All
-                        </label>
-                    </div>
-                    <div *ngFor="let launchpad of launchpads"
-                            class="col-12 form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" 
-                                    name="launchpad" 
-                                    type="radio" 
-                                    [value]="launchpad.id"
-                                    (change)="getLaunches()"
-                                    [(ngModel)]="filters.selectedLaunchpad" />
-                            {{launchpad.full_name}}
-                        </label>
-                    </div>
-                </div> -->
-            </div>
+    <!-- succesful launch -->
+    <!-- <div class="row mt-3">
+        <div class="mt-3">Successful: </div>
+        <div class="col-12 form-check">
+            <label class="form-check-label">
+                <input class="form-check-input"
+                        name="successful"
+                        type="radio"
+                        [value]="null"
+                        (change)="getLaunches()"
+                        [(ngModel)]="filters.successful" />
+                Show all launches
+            </label>
+        </div>
+        <div class="col-12 form-check">
+            <label class="form-check-label">
+                <input class="form-check-input"
+                        name="successful"
+                        type="radio"
+                        [value]="true"
+                        (change)="getLaunches()"
+                        [(ngModel)]="filters.successful" />
+                Show successful launches
+            </label>
+        </div>
+        <div class="col-12 form-check">
+            <label class="form-check-label">
+                <input class="form-check-input"
+                        name="successful"
+                        type="radio"
+                        [value]="false"
+                        (change)="getLaunches()"
+                        [(ngModel)]="filters.successful" />
+                Show failed launches
+            </label>
         </div>
     </div>
-    <div class="col-10">
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <thead class="thead-inverse">
-                        <tr>
-                            <th>Core serial</th>
-                            <th>Block</th>
-                            <th>Status</th>
-                            <th>First launch</th>
-                            <th>Missions</th>
-                            <th>Details</th>
-                            <th>Landings</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let core of cores">
-                            <th valign="middle" 
-                                scope="row">
-                                <a [routerLink]="['../'+core.core_serial]">
-                                    {{core.core_serial}}
-                                </a>
-                            </th>
-                            <td>{{core.block}}</td>
-                            <td>
-                                {{core.status}}
-                            </td>
-                            <td>
-                                <span *ngIf="core.original_launch !== 'TBD'">{{core.original_launch | date}}</span>
-                                <span *ngIf="core.original_launch === 'TBD'">{{core.original_launch}}</span>
-                            </td>
-                            <td>
-                                <div *ngFor="let mission of core.missions">{{mission}}</div>
-                            </td>
-                            <td width="40%">
-                                {{core.details}}
-                            </td>
-                            <td>
-                                <table class="landings w-100">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div>ASDS</div>
-                                                <div>Attempted:</div>
-                                                <div>Landings:</div>
-                                            </td>
-                                            <td>
-                                                <br/>
-                                                <div>
-                                                    <i class="success fa"
-                                                       [ngClass]="{'fa-check': core.asds_attempt, 'fa-times': !core.asds_attempt}">
-                                                    </i>
-                                                </div>
-                                                <div>{{core.asds_landings}}</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div>RTLS</div>
-                                                <div>Attempted:</div>
-                                                <div>Landings:</div>
-                                            </td>
-                                            <td>
-                                                <br/>
-                                                <div>
-                                                    <i class="success fa"
-                                                       [ngClass]="{'fa-check': core.rtls_attempt, 'fa-times': !core.rtls_attempt}">
-                                                    </i>
-                                                </div>
-                                                <div>{{core.rtls_landings}}</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Water landing:</td>
-                                            <td>
-                                                <i class="success fa"
-                                                   [ngClass]="{'fa-check': core.water_landing, 'fa-times': !core.water_landing}">
-                                                 </i>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
+
+    -- rocket type --
+    <div class="row mt-3">
+        <div class="mt-3">Rocket: </div>
+        <div class="col-12 form-check">
+            <label class="form-check-label">
+                <input class="form-check-input"
+                        name="launchpad"
+                        type="radio"
+                        [value]="null"
+                        (change)="getLaunches()"
+                        [(ngModel)]="filters.selectedRocket" />
+                All
+            </label>
+        </div>
+        <div *ngFor="let rocket of rockets"
+                class="col-12 form-check">
+            <label class="form-check-label">
+                <input class="form-check-input"
+                        name="launchpad"
+                        type="radio"
+                        [value]="rocket.id"
+                        (change)="getLaunches()"
+                        [(ngModel)]="filters.selectedRocket" />
+                {{rocket.name}}
+            </label>
+        </div>
+    </div>
+
+    -- sites --
+    <div class="row mt-3">
+        <div class="mt-3">Launch site: </div>
+        <div class="col-12 form-check">
+            <label class="form-check-label">
+                <input class="form-check-input"
+                        name="launchpad"
+                        type="radio"
+                        [value]="null"
+                        (change)="getLaunches()"
+                        [(ngModel)]="filters.selectedLaunchpad" />
+                All
+            </label>
+        </div>
+        <div *ngFor="let launchpad of launchpads"
+                class="col-12 form-check">
+            <label class="form-check-label">
+                <input class="form-check-input"
+                        name="launchpad"
+                        type="radio"
+                        [value]="launchpad.id"
+                        (change)="getLaunches()"
+                        [(ngModel)]="filters.selectedLaunchpad" />
+                {{launchpad.full_name}}
+            </label>
+        </div>
+    </div> -->
+    <!--</div>
+</div>
+</div>-->
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th>Core serial</th>
+              <th>Block</th>
+              <th>Status</th>
+              <th class="hidden-sm-down">First launch</th>
+              <th class="hidden-sm-down">Missions</th>
+              <th class="hidden-sm-down">Details</th>
+              <th class="hidden-sm-down">Landings</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let core of cores">
+              <th valign="middle"
+                  scope="row">
+                <a [routerLink]="['../'+core.serial]">
+                  {{core.serial}}
+                </a>
+              </th>
+              <td>{{core.block}}</td>
+              <td>
+                {{core.status}}
+              </td>
+              <td class="hidden-sm-down">
+                <span *ngIf="core.originalLaunchUTC !== 'TBD'">{{core.originalLaunchUTC | date}}</span>
+                <span *ngIf="core.originalLaunchUTC === 'TBD'">{{core.originalLaunchUTC}}</span>
+              </td>
+              <td class="hidden-sm-down">
+                <div *ngFor="let mission of core.missions">{{mission}}</div>
+              </td>
+              <td class="hidden-sm-down" width="30%">
+                {{core.details}}
+              </td>
+              <td class="hidden-sm-down">
+                <table class="landings w-100">
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div>ASDS</div>
+                      <div>Attempted:</div>
+                      <div>Landings:</div>
+                    </td>
+                    <td>
+                      <br/>
+                      <div>
+                        <i class="success fa"
+                           [ngClass]="{'fa-check': core.attemptedASDS, 'fa-times': !core.attemptedASDS}">
+                        </i>
+                      </div>
+                      <div>{{core.numberOfASDSLandings}}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div>RTLS</div>
+                      <div>Attempted:</div>
+                      <div>Landings:</div>
+                    </td>
+                    <td>
+                      <br/>
+                      <div>
+                        <i class="success fa"
+                           [ngClass]="{'fa-check': core.attemptedRTLS, 'fa-times': !core.attemptedRTLS}">
+                        </i>
+                      </div>
+                      <div>{{core.numberOfRTLSLandings}}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Water landing:</td>
+                    <td>
+                      <i class="success fa"
+                         [ngClass]="{'fa-check': core.waterLanding, 'fa-times': !core.waterLanding}">
+                      </i>
+                    </td>
+                  </tr>
+                  </tbody>
                 </table>
-            </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </div>
 </div>

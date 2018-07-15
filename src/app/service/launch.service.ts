@@ -1,7 +1,7 @@
 import {Injectable, Type} from '@angular/core';
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, retry } from 'rxjs/operators';
+import {catchError, debounceTime, map, retry, switchMap} from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { Launch } from '../model/domain/launch.model';
 import {Capsule} from '../model/domain/capsule.model';
@@ -21,13 +21,14 @@ export class LaunchService extends ApiService<Launch> {
     this.API_BASE_URL = `${ this.API_BASE_URL }/launches`;
   }
 
-  public getById( id: string ): Observable<Launch> {
-    return this.http.get<Launch>(`${this.API_BASE_URL}`, this.getHttpOptions({ flight_number: id }))
-      .pipe(
-        map( response => this.jsonConvert.deserialize( response,  Launch )),
-        retry(3),
-        catchError(this.handleError)
-      );
+  public getById(): Observable<Launch> {
+    return this.getByIdSubject.pipe(
+      debounceTime( 500 ),
+      switchMap( id => this.http.get<Launch[]>( `${this.API_BASE_URL}/${id}`, this.getHttpOptions( { flight_number: id } ) ) ),
+      map( response => this.jsonConvert.deserialize( response, Launch ) ),
+      retry( 3 ),
+      catchError( this.handleError )
+    );
   }
 
 }

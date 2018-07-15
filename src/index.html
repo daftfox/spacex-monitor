@@ -37,20 +37,36 @@
       background: #292b2c;
       z-index: -1;
       text-align: center;
-      padding-top: 30vh;
     }
     /* .splash screen is visible when app is not bootstrapped yet, app-root is empty */
     app-root:empty + .splash {
         opacity: 1;
         z-index: 100;
     }
-    .splash img {
-      margin: 25px 0;
+    .splash img:first-child {
+      position: absolute;
+      top: calc(50vh - 150px);
+      left: calc(50vw - 150px);
+    }
+
+    .splash span {
+      position: absolute;
+      top: 70vh;
+      left: 0;
+      right: 0;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .splash img:last-child {
+      position: absolute;
+      top: 50vh;
+      left: calc(50vw - 50px);
     }
     .spinner {
-      -webkit-animation:spin 4s linear infinite;
-      -moz-animation:spin 4s linear infinite;
-      animation:spin 4s linear infinite;
+      -webkit-animation:spin 1s linear infinite;
+      -moz-animation:spin 1s linear infinite;
+      animation:spin 1s linear infinite;
     }
     @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
     @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
@@ -61,8 +77,8 @@
   <app-root></app-root>
 
   <div class="splash" id="content">
-    <img src="assets/icons/icon-white-500px.png" width="500" alt="SpaceX Monitor logo" />
-    <h1>SpaceX Monitor is loading...</h1>
+    <img src="assets/icons/icon-white-500px.png" width="300" alt="SpaceX Monitor logo" />
+    <span>Loading...</span>
     <img class="spinner" src="assets/icons/spinner-100px.png" width="100" alt="spinner" />
   </div>
 

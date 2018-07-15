@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,7 +34,6 @@ import { SafePipe } from './pipe/safe.pipe';
 import { CardinalPipe } from './pipe/cardinal.pipe';
 import { HttpsPipe } from './pipe/https.pipe';
 import { environment } from '../environments/environment';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 const routes: Routes = [
   {
@@ -111,7 +109,7 @@ const routes: Routes = [
           subTitle: 'Craft designed and produced by SpaceX.',
           cover_image: 'roadster'
         }
-      },{
+      }, {
         path: 'rockets',
         component: RocketsComponent,
         data: {
@@ -119,7 +117,7 @@ const routes: Routes = [
           subTitle: 'Detailed information regarding all SpaceX rockets.',
           cover_image: 'landing'
         }
-      },{
+      }, {
         path: 'rockets/:id',
         component: RocketsDetailComponent,
         data: {
@@ -127,7 +125,7 @@ const routes: Routes = [
           subTitle: ' ',
           cover_image: ' '
         }
-      },{
+      }, {
         path: 'capsules',
         component: CapsulesComponent,
         data: {

@@ -13,7 +13,7 @@
 
 .page .gradient {
     height: 50px;
-    width: 100%;
+    width: 100vw;
     background: -moz-linear-gradient(top, rgba(0,0,0,0.23) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, rgba(0,0,0,0.23) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, rgba(0,0,0,0.23) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -29,7 +29,7 @@
 }
 
 .cover-image {
-    width: 100%;
+    width: 100vw;
     height: 85vh;
     background-size: cover;
     background-position: 100% 100%;
@@ -76,8 +76,11 @@
 }
 
 @media screen and (max-width: 992px) {
-    .page-info {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
+  .page-info {
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+  .image-overlay .page-info {
+    padding-top: 1.1rem;
+  }
 }

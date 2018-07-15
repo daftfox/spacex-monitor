@@ -1,4 +1,4 @@
-import {Injectable, Type} from '@angular/core';
+import {Injectable} from '@angular/core';
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import { Capsule } from '../model/domain/capsule.model';
