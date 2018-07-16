@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CoreService } from '../../../service/core.service';
 import {CoreDetails} from '../../../model/domain/core-details.model';
+import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
     selector: 'all-cores-component',
@@ -10,21 +11,16 @@ import {CoreDetails} from '../../../model/domain/core-details.model';
     ]
 })
 
-export class AllCoresComponent {
-    cores: Array<CoreDetails>;
-
-    coreSub: any;
+export class AllCoresComponent implements OnInit {
+    cores: Observable<CoreDetails[]>;
 
     constructor(private coreService: CoreService) {
-        this.getCores();
+        this.cores = this.coreService.get();
     }
 
-    private getCores(): void {
-        if (this.coreSub) { this.coreSub.unsubscribe(); }
-        this.coreService.get()
-            .subscribe(
-              ( cores: CoreDetails[] ) => this.cores = cores,
-                err => { console.log(err); }
-            );
+    ngOnInit() {
+      setTimeout(() => {
+        this.coreService.refresh();
+      });
     }
 }

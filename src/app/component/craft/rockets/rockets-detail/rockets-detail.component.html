@@ -1,9 +1,8 @@
-<div class="col-12">
+<div class="col-12" *ngIf="rocket | async as rocket">
     <div class="row">
         <div class="col-4">
             <img class="img-fluid rounded"
-                    *ngIf="rocket"
-                    src="assets/images/webp/{{rocket.id}}-500px.webp" />
+                 src="assets/images/webp/{{rocket.id}}-500px.webp" />
         </div>
         <div class="col-8">
             <div class="pl-3">

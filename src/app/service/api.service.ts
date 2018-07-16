@@ -2,14 +2,14 @@ import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular
 import { Type } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import {catchError, retry, map, switchMap, debounceTime} from 'rxjs/operators';
-import { JsonConvert, OperationMode, ValueCheckingMode } from 'json2typescript';
+import { JsonConvert, ValueCheckingMode } from 'json2typescript';
 import { environment } from '../../environments/environment';
 import {Subject} from 'rxjs/internal/Subject';
 
 /**
  * @name ApiService
  * @description
- * This Service is used for retrieving data from an external API defined in todo
+ * This Service is used for retrieving data from an external API defined in environment
  * @param Http injectable provided by angular for making http calls
  */
 export class ApiService<T> {
@@ -23,12 +23,11 @@ export class ApiService<T> {
   constructor(protected http: HttpClient,
               private type: Type<T>) {
     this.jsonConvert = new JsonConvert();
-    // this.jsonConvert.operationMode = OperationMode.LOGGING;
     this.jsonConvert.ignorePrimitiveChecks = false;
     this.jsonConvert.valueCheckingMode = ValueCheckingMode.ALLOW_NULL;
   }
 
-  // get all elements
+  // get observable of all elements
   public get(): Observable<T[]> {
     return this.getSubject.pipe(
       debounceTime( 500 ),
@@ -43,11 +42,11 @@ export class ApiService<T> {
     this.getSubject.next( params );
   }
 
-  // get element by id
+  // get observable of single element
   public getById(): Observable<T> {
     return this.getByIdSubject.pipe(
       debounceTime( 500 ),
-      switchMap( id => this.http.get<T[]>( `${this.API_BASE_URL}/${id}`, this.getHttpOptions( ) ) ),
+      switchMap( id => this.http.get<T>( `${this.API_BASE_URL}/${id}`, this.getHttpOptions( ) ) ),
       map( response => this.jsonConvert.deserialize( response, this.type ) ),
       retry( 3 ),
       catchError( this.handleError )
@@ -56,30 +55,6 @@ export class ApiService<T> {
 
   public refreshById( id: string ) {
     this.getByIdSubject.next( id );
-  }
-
-  public create( body: T, params?: any ): Observable<{}> { // todo: add better typing based on backend response
-    return this.http.post( `${this.API_BASE_URL}`, body, this.getHttpOptions( params ) )
-      .pipe(
-        map( response => this.jsonConvert.deserialize( response,  this.type ) ),
-        catchError( this.handleError )
-      );
-  }
-
-  public update( body: T, params?: any ): Observable<{}> { // todo: add better typing based on backend response
-    return this.http.put( `${this.API_BASE_URL}`, body, this.getHttpOptions( params ) )
-      .pipe(
-        map( response => this.jsonConvert.deserialize( response,  this.type )),
-        catchError( this.handleError )
-      );
-  }
-
-  public delete( id: number, params?: any ): Observable<{}> { // todo: add better typing based on backend response
-    return this.http.delete( `${this.API_BASE_URL}/${id}`, this.getHttpOptions( params ) )
-      .pipe(
-        map( response => this.jsonConvert.deserialize( response,  this.type ) ),
-        catchError( this.handleError )
-      );
   }
 
   // consumes any key/value object and returns an HttpParams object

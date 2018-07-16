@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CoreService } from '../../../service/core.service';
 import { ActivatedRoute } from '@angular/router';
 import {CoreDetails} from '../../../model/domain/core-details.model';
+import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
     selector: 'cores-detail-component',
@@ -11,30 +12,23 @@ import {CoreDetails} from '../../../model/domain/core-details.model';
     ]
 })
 
-export class CoresDetailComponent {
+export class CoresDetailComponent implements OnInit {
     id: string;
-    core: CoreDetails;
+    core: Observable<CoreDetails>;
 
-    coreSub: any;
     routeSub: any;
 
     constructor(private coreService: CoreService,
                 private route: ActivatedRoute) {
-
+        this.core = this.coreService.getById();
         this.routeSub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.getCore();
         });
     }
 
-    private getCore(): void {
-        if (this.coreSub) { this.coreSub.unsubscribe(); };
-        this.coreService.getById(this.id)
-            .subscribe(
-              (core: CoreDetails) => {
-                    this.core = core;
-                },
-                err => { console.log(err); }
-            );
+    ngOnInit() {
+      setTimeout(() => {
+        this.coreService.refreshById( this.id );
+      });
     }
 }

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RocketService } from '../../../../service/rocket.service';
 import { ActivatedRoute } from '@angular/router';
+import {Rocket} from '../../../../model/domain/rocket.model';
+import {Observable} from 'rxjs/internal/Observable';
 
 @Component({
     selector: 'rockets-detail-component',
@@ -10,28 +12,23 @@ import { ActivatedRoute } from '@angular/router';
     ]
 })
 
-export class RocketsDetailComponent {
+export class RocketsDetailComponent implements OnInit {
     id: string;
-    rocket: any;
+    rocket: Observable<Rocket>;
 
-    rocketSub: any;
     routeSub: any;
 
     constructor(private rocketService: RocketService,
                 private route: ActivatedRoute) {
-
+        this.rocket = this.rocketService.getById();
         this.routeSub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.getRocket();
         });
     }
 
-    private getRocket(): void {
-        if (this.rocketSub) this.rocketSub.unsubscribe();
-        this.rocketService.getById(this.id)
-            .subscribe(
-                res => this.rocket = res,
-                err => { console.log(err); }
-            );
+    ngOnInit() {
+      setTimeout(() => {
+        this.rocketService.refreshById( this.id );
+      });
     }
 }

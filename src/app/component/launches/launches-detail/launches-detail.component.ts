@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { LaunchService } from '../../../service/launch.service';
 import { LaunchpadService } from '../../../service/launchpad.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import {Observable} from 'rxjs/internal/Observable';
     ]
 })
 
-export class LaunchesDetailComponent {
+export class LaunchesDetailComponent implements OnInit {
     iframe_html: any;
 
     id: string;
@@ -43,8 +43,13 @@ export class LaunchesDetailComponent {
         this.launchpad = this.launchpadService.getById();
         this.routeSub = this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.launchService.refreshById( this.id );
         });
+    }
+
+    ngOnInit() {
+      setTimeout(() => {
+        this.launchService.refreshById( this.id );
+      });
     }
 
     // private getLaunch(): void {

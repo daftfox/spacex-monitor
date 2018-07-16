@@ -19,9 +19,7 @@ export class AppComponent implements OnInit {
   rocketSub: any;
   launchSub: any;
 
-  constructor(private router: Router,
-              private launchService: LaunchService,
-              private rocketService: RocketService) {
+  constructor(private router: Router) {
 
   }
 
@@ -43,7 +41,7 @@ export class AppComponent implements OnInit {
                 this.pageTitle = root.data[ 'pageTitle' ];
                 this.subTitle = root.data[ 'subTitle' ];
                 this.coverImage = root.data[ 'cover_image' ];
-                this.getDynamicPageTitle();
+                // this.getDynamicPageTitle();
                 return;
               } else {
                 return;
@@ -52,47 +50,47 @@ export class AppComponent implements OnInit {
           });
   }
 
-  private getDateString( date: string ): string {
-      let dateString = '';
-      const dateObj = new Date( date );
-      dateString += `${dateObj.getDate()}-${dateObj.getMonth() + 1}-${dateObj.getFullYear()}`;
-      return dateString;
-  }
+  // private getDateString( date: string ): string {
+  //     let dateString = '';
+  //     const dateObj = new Date( date );
+  //     dateString += `${dateObj.getDate()}-${dateObj.getMonth() + 1}-${dateObj.getFullYear()}`;
+  //     return dateString;
+  // }
 
-  private getRocket( id: string ): void {
-    if ( this.rocketSub ) { this.rocketSub.unsubscribe(); }
-    this.rocketService.getById( id )
-        .subscribe(
-          ( rocket: Rocket ) => {
-                this.pageTitle = rocket.name;
-                this.subTitle = `First flight: ${this.getDateString( rocket.firstFlight )}`;
-                this.coverImage = rocket.id;
-            },
-            err => { console.log(err); }
-        );
-  }
+  // private getRocket( id: string ): void {
+  //   if ( this.rocketSub ) { this.rocketSub.unsubscribe(); }
+  //   this.rocketService.getById( id )
+  //       .subscribe(
+  //         ( rocket: Rocket ) => {
+  //               this.pageTitle = rocket.name;
+  //               this.subTitle = `First flight: ${this.getDateString( rocket.firstFlight )}`;
+  //               this.coverImage = rocket.id;
+  //           },
+  //           err => { console.log(err); }
+  //       );
+  // }
+  //
+  // private getLaunch( id: string ): void {
+  //   if ( this.launchSub ) { this.launchSub.unsubscribe(); }
+  //   this.launchService.getById( id )
+  //       .subscribe(
+  //         ( launch: Launch ) => {
+  //               this.pageTitle = `Launch number: ${launch.flightNumber}`;
+  //               this.subTitle = `Date of launch: ${this.getDateString(launch.launchDateUTC)}`;
+  //           },
+  //           err => { console.log(err); }
+  //       );
+  // }
 
-  private getLaunch( id: string ): void {
-    if ( this.launchSub ) { this.launchSub.unsubscribe(); }
-    this.launchService.getById( id )
-        .subscribe(
-          ( launch: Launch ) => {
-                this.pageTitle = `Launch number: ${launch.flightNumber}`;
-                this.subTitle = `Date of launch: ${this.getDateString(launch.launchDateUTC)}`;
-            },
-            err => { console.log(err); }
-        );
-  }
-
-  private getDynamicPageTitle() {
-    const id = window.location.href.split( '/' ).slice( -1 ).pop();
-    switch ( this.pageTitle ) {
-        case 'rd':
-            this.getRocket( id );
-            break;
-        case 'ld':
-            this.getLaunch( id );
-            break;
-    }
-  }
+  // private getDynamicPageTitle() {
+  //   const id = window.location.href.split( '/' ).slice( -1 ).pop();
+  //   switch ( this.pageTitle ) {
+  //       case 'rd':
+  //           this.getRocket( id );
+  //           break;
+  //       case 'ld':
+  //           this.getLaunch( id );
+  //           break;
+  //   }
+  // }
 }

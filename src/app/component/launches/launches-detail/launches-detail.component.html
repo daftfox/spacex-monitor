@@ -1,25 +1,25 @@
-<div class="col-12">
+<div class="col-12" *ngIf="launch | async as launch">
     <div class="row pl-2 pr-2">
         <div class="col-4">
             <h2>Mission patch: </h2>
             <img class="img-fluid rounded mt-3"
-                    *ngIf="(launch | async)"
-                    src="{{(launch | async)?.links.missionPatch}}" />
+                    *ngIf="launch"
+                    src="{{launch.links.missionPatch}}" />
         </div>
         <div class="col-8">
             <div class="pl-3">
                 <h2>General information:</h2>
                 <table class="table"
-                        *ngIf="(launch | async)">
+                        *ngIf="launch">
                     <tbody>
                         <tr>
-                            <td colspan="2">{{(launch | async)?.details}}</td>
+                            <td colspan="2">{{launch.details}}</td>
                         </tr>
                         <tr>
                             <td>Success:</td>
                             <td>
                                 <i class="success fas"
-                                    [ngClass]="{'fa-check': (launch | async)?.success, 'fa-times': !(launch | async)?.success}">
+                                    [ngClass]="{'fa-check': launch.success, 'fa-times': !launch.success}">
                                 </i>
                             </td>
                         </tr>
@@ -28,24 +28,24 @@
                                 Rocket:
                             </td>
                             <td>
-                                <a [routerLink]="['/craft', 'rockets', (launch | async)?.rocket.id]">
-                                    {{(launch | async)?.rocket.name}}
+                                <a [routerLink]="['/craft', 'rockets', launch.rocket.id]">
+                                    {{launch.rocket.name}}
                                 </a>
                             </td>
                         </tr>
-                        <tr *ngIf="(launch | async)?.telemetry.flightClub">
+                        <tr *ngIf="launch.telemetry.flightClub">
                             <td>Telemetry:</td>
                             <td>
-                                <a [href]="(launch | async)?.telemetry.flightClub">
+                                <a [href]="launch.telemetry.flightClub">
                                     Flight club
                                     <i class="fas fa-external-link-alt"></i>
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td>Launch site:</td>
+                            <td>launch site:</td>
                             <td>
-                                <div class="mb-2">{{(launch | async)?.launchSite.longName}}</div>
+                                <div class="mb-2">{{launch.launchSite.longName}}</div>
                             </td>
                         </tr>
                     </tbody>
@@ -66,7 +66,7 @@
                             <!--<br/>-->
                             <!--<span>Rockets launched:</span>-->
                             <!--<ul>-->
-                                <!--<li *ngFor="let rocket of launchpad.vehiclesLaunched">-->
+                                <!--<li *ngFor="let rocket of launchpad.vehicleslaunched">-->
                                     <!--{{rocket}}-->
                                 <!--</li>-->
                             <!--</ul>-->
@@ -80,7 +80,7 @@
         <div class="col-12 col-lg-6">
             <h2 class="pl-2 pr-2">First stage:</h2>
             <table class="table"
-                    *ngIf="(launch | async)">
+                    *ngIf="launch">
                 <thead class="thead-inverse">
                     <th>Serial</th>
                     <th>Block</th>
@@ -89,7 +89,7 @@
                     <th>Reused</th>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let core of (launch | async)?.rocket.firstStage.cores">
+                    <tr *ngFor="let core of launch.rocket.firstStage.cores">
                         <td>
                             <a [routerLink]="['/cores', core.serial]">{{core.serial}}</a>
                         </td>
@@ -112,7 +112,7 @@
         <div class="col-12 col-lg-6">
             <h2 class="pl-2 pr-2">Second stage:</h2>
             <table class="table"
-                    *ngIf="(launch | async)">
+                    *ngIf="launch">
                 <thead class="thead-inverse">
                     <th>Id</th>
                     <th class="hidden-sm-down">Type</th>
@@ -121,7 +121,7 @@
                     <th>Customers</th>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let payload of (launch | async)?.rocket.secondStage.payloads">
+                    <tr *ngFor="let payload of launch.rocket.secondStage.payloads">
                         <td>{{payload.id}}</td>
                         <td class="hidden-sm-down">{{payload.type}}</td>
                         <td>

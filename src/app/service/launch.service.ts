@@ -24,8 +24,8 @@ export class LaunchService extends ApiService<Launch> {
   public getById(): Observable<Launch> {
     return this.getByIdSubject.pipe(
       debounceTime( 500 ),
-      switchMap( id => this.http.get<Launch[]>( `${this.API_BASE_URL}/${id}`, this.getHttpOptions( { flight_number: id } ) ) ),
-      map( response => this.jsonConvert.deserialize( response, Launch ) ),
+      switchMap( id => this.http.get<Launch>( `${this.API_BASE_URL}`, this.getHttpOptions( { flight_number: id } ) ) ),
+      map( response => this.jsonConvert.deserialize( response[0], Launch ) ),
       retry( 3 ),
       catchError( this.handleError )
     );

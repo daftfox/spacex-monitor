@@ -117,7 +117,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let core of cores">
+            <tr *ngFor="let core of cores | async">
               <th valign="middle"
                   scope="row">
                 <a [routerLink]="['../'+core.serial]">
