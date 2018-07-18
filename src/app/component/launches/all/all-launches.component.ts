@@ -6,13 +6,32 @@ import { Launch } from '../../../model/domain/launch.model';
 import { Launchpad } from '../../../model/domain/launch-pad.model';
 import { Rocket } from '../../../model/domain/rocket.model';
 import { Observable } from 'rxjs';
-import { Subject } from 'rxjs';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'all-launches-component',
   templateUrl: './all-launches.component.html',
   styleUrls: [
     './all-launches.component.css'
+  ],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ // each time the binding value changes
+        query(':leave', [
+          stagger(100, [
+            style({ transform: 'translateY(100px)' }),
+            animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1}))
+          ])
+        ], { optional: true}),
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(100, [
+            style({ transform: 'translateY(100px)' }),
+            animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1}))
+          ])
+        ], { optional: true})
+      ])
+    ])
   ]
 })
 
@@ -59,43 +78,4 @@ export class AllLaunchesComponent implements OnInit {
   refreshLaunches() {
 
   }
-
-  // getLaunches(): void {
-  //   if ( this.launchSub ) {
-  //     this.launchSub.unsubscribe();
-  //   }
-  //   this.launchSub = this.launchService.get( /*this.filters*/ )
-  //     .subscribe(
-  //       ( launches: Launch[] ) => this.launches = launches,
-  //       err => {
-  //         console.log( err );
-  //       }
-  //     );
-  // }
-  //
-  // private getLaunchPads(): void {
-  //   if ( this.launchpadSub ) {
-  //     this.launchpadSub.unsubscribe();
-  //   }
-  //   this.launchpadService.get()
-  //     .subscribe(
-  //       ( launchpads: Launchpad[] ) => this.launchpads = launchpads,
-  //       err => {
-  //         console.log(err);
-  //       }
-  //     );
-  // }
-  //
-  // private getRockets(): void {
-  //   if ( this.rocketSub ) {
-  //     this.rocketSub.unsubscribe();
-  //   }
-  //   this.rocketService.get()
-  //     .subscribe(
-  //       res => this.rockets = res,
-  //       err => {
-  //         console.log( err );
-  //       }
-  //     );
-  // }
 }

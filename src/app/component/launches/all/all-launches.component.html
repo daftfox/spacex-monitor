@@ -17,9 +17,9 @@
   </div>
 
   <div class="col-9">
-    <div class="list">
+    <div class="list" [@listAnimation]="launches.length" *ngIf="launches | async as launches">
       <div class="list-element"
-           *ngFor="let launch of launches | async"
+           *ngFor="let launch of launches"
            [routerLink]="['../', launch.flightNumber]">
         <div class="image">
           <img [src]="launch.links.missionPatch" [alt]="launch.missionName" />

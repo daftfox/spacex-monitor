@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AgmCoreModule } from '@agm/core';
 
@@ -174,7 +175,8 @@ const routes: Routes = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDsCE5gAJnCw2LEBvCQRXWCn3ne-S5lZEw'
     }),
-    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
+    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : [],
+    BrowserAnimationsModule
   ],
   providers: [
     InfoService,
