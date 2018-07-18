@@ -22,6 +22,9 @@ import { LaunchesDetailComponent } from './component/launches/launches-detail/la
 import { CoresComponent } from './component/cores/cores.component';
 import { AllCoresComponent } from './component/cores/all/all-cores.component';
 import { CoresDetailComponent } from './component/cores/cores-detail/cores-detail.component';
+import { PageTitleComponent } from './component/page-title-subtitle/page-title/page-title.component';
+import { PageSubtitleComponent } from './component/page-title-subtitle/page-subtitle/page-subtitle.component';
+import { SideBarComponent } from './component/side-bar/side-bar.component';
 
 import { LaunchService } from './service/launch.service';
 import { LaunchpadService } from './service/launchpad.service';
@@ -44,9 +47,10 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     data: {
-      pageTitle: 'Home',
-      subTitle: 'About this app and SpaceX.',
-      cover_image: 'mars'
+      pageTitle: 'About this app and SpaceX',
+      pageSubtitle: 'Including what you never dared to ask',
+      cover_image: 'mars',
+      navIconClass: 'fas fa-home'
     }
   }, {
     path: 'cores',
@@ -58,23 +62,25 @@ const routes: Routes = [
         component: AllCoresComponent,
         data: {
           pageTitle: 'Cores',
-          subTitle: 'A list containing all rocket core components.',
-          cover_image: 'cores'
+          pageSubtitle: 'A list containing all rocket core components.'
         }
-      },
-      {
+      }, {
         path: ':id',
         component: CoresDetailComponent,
         data: {
           pageTitle: 'cd',
-          subTitle: ' ',
-          cover_image: 'cores'
+          pageSubtitle: ' '
         }
       }
     ]
   }, {
     path: 'launches',
     component: LaunchesComponent,
+    data: {
+      navIconClass: 'launch-icon',
+      pageTitle: 'Launches',
+      pageSubtitle: 'All previous and future launches.',
+    },
     children: [
       { path: '', redirectTo: 'all', pathMatch: 'full' },
       {
@@ -82,23 +88,25 @@ const routes: Routes = [
         component: AllLaunchesComponent,
         data: {
           pageTitle: 'Launches',
-          subTitle: 'A list containing all launches SpaceX has performed and will perform.',
-          cover_image: 'liftoff'
+          pageSubtitle: 'All previous and future launches.'
         }
-      },
-      {
+      }, {
         path: ':id',
         component: LaunchesDetailComponent,
         data: {
           pageTitle: 'ld',
-          subTitle: ' ',
-          cover_image: 'liftoff'
+          pageSubtitle: ' '
         }
       }
     ]
   }, {
     path: 'craft',
     component: CraftComponent,
+    data: {
+      navIconClass: 'fas fa-rocket',
+      pageTitle: 'Vehicles',
+      pageSubtitle: 'Vehicles designed and produced by SpaceX.'
+    },
     children: [
       { path: '', redirectTo: 'all', pathMatch: 'full' },
       {
@@ -106,32 +114,28 @@ const routes: Routes = [
         component: AllCraftComponent,
         data: {
           pageTitle: 'Craft',
-          subTitle: 'Craft designed and produced by SpaceX.',
-          cover_image: 'roadster'
+          pageSubtitle: 'Craft designed and produced by SpaceX.'
         }
       }, {
         path: 'rockets',
         component: RocketsComponent,
         data: {
           pageTitle: 'Rockets',
-          subTitle: 'Detailed information regarding all SpaceX rockets.',
-          cover_image: 'landing'
+          pageSubtitle: 'Detailed information regarding all SpaceX rockets.'
         }
       }, {
         path: 'rockets/:id',
         component: RocketsDetailComponent,
         data: {
           pageTitle: 'rd',
-          subTitle: ' ',
-          cover_image: ' '
+          pageSubtitle: ' '
         }
       }, {
         path: 'capsules',
         component: CapsulesComponent,
         data: {
           pageTitle: 'Capsules',
-          subTitle: 'Detailed information regarding all SpaceX capsules.',
-          cover_image: 'capsule'
+          pageSubtitle: 'Detailed information regarding all SpaceX capsules.'
         }
       }
     ]
@@ -157,7 +161,10 @@ const routes: Routes = [
     LaunchesDetailComponent,
     CoresComponent,
     AllCoresComponent,
-    CoresDetailComponent
+    CoresDetailComponent,
+    PageTitleComponent,
+    PageSubtitleComponent,
+    SideBarComponent
   ],
   imports: [
     HttpClientModule,

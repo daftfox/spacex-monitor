@@ -1,21 +1,10 @@
-<spacex-header></spacex-header>
+<div class="container-fluid landing">
 
-<div [ngClass]="coverImage" class="cover-image"></div>
-<div class="m-0 image-overlay row justify-content-center">
-  <div class="page-info col-12 col-lg-6">
-    <h1 *ngIf="pageTitle.length > 2">{{pageTitle}}</h1>
-    <span class="subtitle">{{subTitle}}</span>
-  </div>
-</div>
+  <div class="background blurred"></div>
 
-<div class="container-fluid p-0">
-  <div class="page row justify-content-center no-gutters">
-    <div class="gradient"></div>
-    <div class="col" [ngClass]="{'col-lg-6': pageTitle === 'Home', 'col-lg-12': pageTitle !== 'Home'}">
-      <router-outlet></router-outlet>
-    </div>
-    <div class="col-10">
-        <spacex-footer></spacex-footer>
-    </div>
+  <side-bar></side-bar>
+
+  <div class="viewport">
+    <router-outlet></router-outlet>
   </div>
 </div>

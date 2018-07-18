@@ -1,93 +1,87 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>SpacexMonitor</title>
-  <base href="/">
-  <link rel="preload manifest" href="manifest.json">
+  <head>
+    <meta charset="utf-8">
+    <title>SpacexMonitor</title>
+    <base href="/">
+    <link rel="preload manifest" href="manifest.json">
 
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="SpaceX Monitor">
-  <meta name="apple-mobile-web-app-title" content="SpaceX Monitor">
-  <meta name="theme-color" content="#292b2c">
-  <meta name="msapplication-navbutton-color" content="#292b2c">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="msapplication-starturl" content="https://spacex-monitor.timothy.fyi/">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="SpaceX Monitor">
+    <meta name="apple-mobile-web-app-title" content="SpaceX Monitor">
+    <meta name="theme-color" content="#292b2c">
+    <meta name="msapplication-navbutton-color" content="#292b2c">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="https://spacex-monitor.timothy.fyi/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/icon-black-512x512.png">
-  <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="assets/icons/icon-black-512x512.png">
-  <link rel="icon" type="image/png" href="assets/icons/icon-black-512x512.png">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/brands.css" integrity="sha384-IiIL1/ODJBRTrDTFk/pW8j0DUI5/z9m1KYsTm/RjZTNV8RHLGZXkUDwgRRbbQ+Jh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/icon-black-512x512.png">
+    <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="assets/icons/icon-black-512x512.png">
+    <link rel="icon" type="image/png" href="assets/icons/icon-black-512x512.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
-  <style>
-    .splash {
-      opacity: 0;
-      transition: opacity .8s ease-in-out;
-      position: fixed;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-      color: white;
-      background: #292b2c;
-      z-index: -1;
-      text-align: center;
-    }
-    /* .splash screen is visible when app is not bootstrapped yet, app-root is empty */
-    app-root:empty + .splash {
-        opacity: 1;
-        z-index: 100;
-    }
-    .splash img:first-child {
-      position: absolute;
-      top: calc(50vh - 150px);
-      left: calc(50vw - 150px);
-    }
+    <style>
+      .splash {
+        opacity: 0;
+        transition: opacity .8s ease-in-out;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        color: white;
+        background: #292b2c;
+        z-index: -1;
+        text-align: center;
+      }
+      /* .splash screen is visible when app is not bootstrapped yet, app-root is empty */
+      app-root:empty + .splash {
+          opacity: 1;
+          z-index: 100;
+      }
+      .splash img:first-child {
+        position: absolute;
+        top: calc(50vh - 150px);
+        left: calc(50vw - 150px);
+      }
 
-    .splash span {
-      position: absolute;
-      top: 70vh;
-      left: 0;
-      right: 0;
-      font-weight: 500;
-      line-height: 1.1;
-    }
+      .splash span {
+        position: absolute;
+        top: 70vh;
+        left: 0;
+        right: 0;
+        font-weight: 500;
+        line-height: 1.1;
+      }
 
-    .splash img:last-child {
-      position: absolute;
-      top: 50vh;
-      left: calc(50vw - 50px);
-    }
-    .spinner {
-      -webkit-animation:spin 1s linear infinite;
-      -moz-animation:spin 1s linear infinite;
-      animation:spin 1s linear infinite;
-    }
-    @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-    @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-    @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-  </style>
-</head>
-<body>
-  <app-root></app-root>
+      .splash img:last-child {
+        position: absolute;
+        top: 50vh;
+        left: calc(50vw - 50px);
+      }
+      .spinner {
+        -webkit-animation:spin 1s linear infinite;
+        -moz-animation:spin 1s linear infinite;
+        animation:spin 1s linear infinite;
+      }
+      @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+      @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+      @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <app-root></app-root>
 
-  <div class="splash" id="content">
-    <img src="assets/icons/icon-white-500px.png" width="300" alt="SpaceX Monitor logo" />
-    <span>Loading...</span>
-    <img class="spinner" src="assets/icons/spinner-100px.png" width="100" alt="spinner" />
-  </div>
+    <div class="splash" id="content">
+      <img src="assets/icons/icon-white-500px.png" width="300" alt="SpaceX Monitor logo" />
+      <span>Loading...</span>
+      <img class="spinner" src="assets/icons/spinner-100px.png" width="100" alt="spinner" />
+    </div>
 
-  <noscript>
-    <p>Sorry, JavaScript must be enabled to use this app.</p>
-  </noscript>
+    <noscript>
+      <p>Sorry, JavaScript must be enabled to use this app.</p>
+    </noscript>
 
-  <script defer src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-  <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-</body>
+  </body>
 </html>

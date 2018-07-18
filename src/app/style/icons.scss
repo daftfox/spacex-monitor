@@ -1,0 +1,17 @@
+i.launch-icon {
+  width: 27px;
+  height: 27px;
+  mask: url("/assets/icons/launch.svg") no-repeat 100% 100%;
+  display: block;
+  mask-size: cover;
+  background-color: $sidebarButtonFontColor;
+  transition: background-color ease-in-out 200ms;
+}
+
+div:hover>i[class$="-icon"] {
+  background-color: $sidebarButtonFontColor--hover;
+}
+
+div.active>i[class$="-icon"] {
+  background-color: $sidebarButtonFontColor--hover;
+}

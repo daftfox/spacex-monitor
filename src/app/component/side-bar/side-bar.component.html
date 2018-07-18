@@ -1,0 +1,10 @@
+<div class="sidebar">
+  <div class="buttons">
+    <div *ngFor="let route of routes"
+         routerLinkActive="active"
+         [routerLink]="route.path">
+      <i [class]="route.data.navIconClass"></i>
+      <span>{{route.data.pageTitle}}</span>
+    </div>
+  </div>
+</div>

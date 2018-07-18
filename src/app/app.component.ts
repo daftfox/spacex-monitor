@@ -1,53 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { RocketService } from './service/rocket.service';
-import { LaunchService } from './service/launch.service';
-import { filter } from 'rxjs/operators';
-import { Launch } from './model/domain/launch.model';
-import { Rocket } from './model/domain/rocket.model';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  pageTitle = '';
-  subTitle = '';
-  coverImage = '';
 
-  rocketSub: any;
-  launchSub: any;
-
-  constructor(private router: Router) {
+  constructor() {
 
   }
 
-  // todo: abstractify away in separate component and refactor class
+  // todo: put code in ngOnInit in separate service that returns an observable
   ngOnInit() {
-    this.router.events
-      .pipe(
-        filter((event: any) => event instanceof NavigationEnd)
-      )
-      .subscribe(() => {
-            let root = this.router.routerState.snapshot.root;
-            while (root) {
-              if (root.children && root.children.length) {
-                root = root.children[0];
-              } else if ( root.data &&
-                root.data[ 'pageTitle' ] &&
-                root.data[ 'cover_image' ] &&
-                root.data[ 'subTitle' ] ) {
-                this.pageTitle = root.data[ 'pageTitle' ];
-                this.subTitle = root.data[ 'subTitle' ];
-                this.coverImage = root.data[ 'cover_image' ];
-                // this.getDynamicPageTitle();
-                return;
-              } else {
-                return;
-              }
-            }
-          });
+    // this.router.events
+    //   .pipe(
+    //     filter((event: any) => event instanceof NavigationEnd)
+    //   )
+    //   .subscribe(() => {
+    //         let root = this.router.routerState.snapshot.root;
+    //         while (root) {
+    //           if (root.children && root.children.length) {
+    //             root = root.children[0];
+    //           } else if ( root.data &&
+    //             root.data[ 'pageTitle' ] &&
+    //             root.data[ 'cover_image' ] &&
+    //             root.data[ 'subTitle' ] ) {
+    //             return;
+    //           } else {
+    //             return;
+    //           }
+    //         }
+    //       });
   }
 
   // private getDateString( date: string ): string {

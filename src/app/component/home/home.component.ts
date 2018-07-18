@@ -6,7 +6,7 @@ import {SpacexInfo} from '../../model/domain/spacex-info.model';
     selector: 'home-component',
     templateUrl: './home.component.html',
     styleUrls: [
-        './home.component.css'
+        './home.component.scss'
     ]
 })
 

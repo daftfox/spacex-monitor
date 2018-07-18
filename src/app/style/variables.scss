@@ -1,0 +1,41 @@
+// global
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+) !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+$primaryTextColor: #ccc;
+$secondaryTextColor: #636c72;
+$detailTextColor: #3e94ff;
+
+$backgroundBlurAmount: 20px;
+
+$successTextColor: #8fff5f;
+$dangerTextColor: #ff543e;
+
+// sidebar
+$sidebarWidth: 4rem;
+
+$sidebarBackgroundColor: #222;
+
+$sidebarButtonFontSize: 1.6em;
+$sidebarButtonFontColor: #888;
+$sidebarButtonFontColor--active: #111;
+$sidebarButtonFontColor--hover: #111;
+
+$sidebarButtonBackgroundColor--active: #515151;
+$sidebarButtonBackgroundColor--hover: #515151;
+
+
+// content card
+$contentCardBackgroundColor: #222;

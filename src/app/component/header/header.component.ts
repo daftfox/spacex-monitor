@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
     selector: 'spacex-header',
     templateUrl: './header.component.html',
     styleUrls: [
-        './header.component.css'
+        './header.component.scss'
     ]
 })
 
 export class HeaderComponent {
-    
+
 }
