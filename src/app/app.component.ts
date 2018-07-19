@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {routerTransition} from './router.animations';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [ routerTransition ]
 })
 export class AppComponent implements OnInit {
 
@@ -33,6 +35,10 @@ export class AppComponent implements OnInit {
     //           }
     //         }
     //       });
+  }
+
+  getState( outlet ) {
+    return outlet.activatedRouteData.state;
   }
 
   // private getDateString( date: string ): string {

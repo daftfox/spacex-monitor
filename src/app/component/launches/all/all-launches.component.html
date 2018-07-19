@@ -41,6 +41,12 @@
         </div>
       </div>
     </div>
+
+    <div class="spinner"
+         [@fadeAnimation]="length">
+      <spinner *ngIf="length < 1"
+               [size]="'md'"></spinner>
+    </div>
   </div>
 </section>
 

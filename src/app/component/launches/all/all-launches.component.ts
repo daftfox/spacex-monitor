@@ -6,7 +6,9 @@ import { Launch } from '../../../model/domain/launch.model';
 import { Launchpad } from '../../../model/domain/launch-pad.model';
 import { Rocket } from '../../../model/domain/rocket.model';
 import { Observable } from 'rxjs';
-import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
+import {map} from 'rxjs/operators';
+import {listAnimation} from '../../../animation/list.animation';
+import {fadeAnimation} from '../../../animation/fade.animation';
 
 @Component({
   selector: 'all-launches-component',
@@ -15,23 +17,8 @@ import {animate, query, stagger, style, transition, trigger} from '@angular/anim
     './all-launches.component.css'
   ],
   animations: [
-    trigger('listAnimation', [
-      transition('* => *', [ // each time the binding value changes
-        query(':leave', [
-          stagger(100, [
-            style({ transform: 'translateY(100px)' }),
-            animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1}))
-          ])
-        ], { optional: true}),
-        query(':enter', [
-          style({ opacity: 0 }),
-          stagger(100, [
-            style({ transform: 'translateY(100px)' }),
-            animate('1s cubic-bezier(.75,-0.48,.26,1.52)', style({transform: 'translateY(0px)', opacity: 1}))
-          ])
-        ], { optional: true})
-      ])
-    ])
+    listAnimation,
+    fadeAnimation
   ]
 })
 
@@ -39,6 +26,8 @@ export class AllLaunchesComponent implements OnInit {
   launches: Observable<Launch[]>;
   launchpads: Observable<Launchpad[]>;
   rockets: Observable<Rocket[]>;
+  length = 0;
+
   filters = {
     site_id: null,
     launch_success: null,
@@ -52,7 +41,11 @@ export class AllLaunchesComponent implements OnInit {
     this.launches = this.launchService.get();
     this.rockets = this.rocketService.get();
     this.launchpads = this.launchpadService.get();
-
+    this.launchService.get().pipe(
+      map( ( launches: Launch[]) => launches.length )
+    ).subscribe(
+      length => this.length = length
+    );
   }
 
   ngOnInit() {
@@ -60,7 +53,7 @@ export class AllLaunchesComponent implements OnInit {
       this.launchService.refresh();
       this.rocketService.refresh();
       this.launchpadService.refresh();
-    });
+    }, 10);
   }
 
   reusedCores( cores: any ): number {

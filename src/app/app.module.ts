@@ -26,6 +26,7 @@ import { CoresDetailComponent } from './component/cores/cores-detail/cores-detai
 import { PageTitleComponent } from './component/page-title-subtitle/page-title/page-title.component';
 import { PageSubtitleComponent } from './component/page-title-subtitle/page-subtitle/page-subtitle.component';
 import { SideBarComponent } from './component/side-bar/side-bar.component';
+import { SpinnerComponent } from './component/spinner/spinner.component';
 
 import { LaunchService } from './service/launch.service';
 import { LaunchpadService } from './service/launchpad.service';
@@ -51,7 +52,8 @@ const routes: Routes = [
       pageTitle: 'About this app and SpaceX',
       pageSubtitle: 'Including what you never dared to ask',
       cover_image: 'mars',
-      navIconClass: 'fas fa-home'
+      navIconClass: 'fas fa-home',
+      state: 'home'
     }
   }, {
     path: 'cores',
@@ -81,6 +83,7 @@ const routes: Routes = [
       navIconClass: 'launch-icon',
       pageTitle: 'Launches',
       pageSubtitle: 'All previous and future launches.',
+      state: 'launches'
     },
     children: [
       { path: '', redirectTo: 'all', pathMatch: 'full' },
@@ -106,7 +109,8 @@ const routes: Routes = [
     data: {
       navIconClass: 'fas fa-rocket',
       pageTitle: 'Vehicles',
-      pageSubtitle: 'Vehicles designed and produced by SpaceX.'
+      pageSubtitle: 'Vehicles designed and produced by SpaceX.',
+      state: 'vehicles'
     },
     children: [
       { path: '', redirectTo: 'all', pathMatch: 'full' },
@@ -165,7 +169,8 @@ const routes: Routes = [
     CoresDetailComponent,
     PageTitleComponent,
     PageSubtitleComponent,
-    SideBarComponent
+    SideBarComponent,
+    SpinnerComponent
   ],
   imports: [
     HttpClientModule,

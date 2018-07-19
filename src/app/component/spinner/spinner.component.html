@@ -1,0 +1,14 @@
+<span>
+  <img src="/assets/icons/spinner-100px.png"
+       *ngIf="size && size === 'sm'"
+       width="50px"
+       alt="spinner" />
+  <img src="/assets/icons/spinner-100px.png"
+       *ngIf="!size || size === 'md'"
+       width="100px"
+       alt="spinner" />
+  <img src="/assets/icons/spinner-200px.png"
+       *ngIf="size && size === 'lg'"
+       width="200px"
+       alt="spinner" />
+</span>

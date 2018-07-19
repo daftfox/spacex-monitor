@@ -62,6 +62,13 @@
   height: calc(100vh - 200px);
   padding: 100px 75px 25px;
 
+  .spinner {
+    height: calc(100vh - 325px);
+    width: 100%;
+    display: grid;
+    place-content: center;
+  }
+
   >.col-3 {
     height: 5.5rem;
   }

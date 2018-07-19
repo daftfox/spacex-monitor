@@ -4,7 +4,8 @@
 
   <side-bar></side-bar>
 
-  <div class="viewport">
-    <router-outlet></router-outlet>
-  </div>
+  <main [@routerTransition]="getState(o)"
+        class="viewport">
+    <router-outlet #o="outlet"></router-outlet>
+  </main>
 </div>
