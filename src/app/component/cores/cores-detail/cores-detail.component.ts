@@ -20,7 +20,7 @@ export class CoresDetailComponent implements OnInit {
 
     constructor(private coreService: CoreService,
                 private route: ActivatedRoute) {
-        this.core = this.coreService.getById();
+        //this.core = this.coreService.getById();
         this.routeSub = this.route.params.subscribe(params => {
             this.id = params['id'];
         });
@@ -28,7 +28,7 @@ export class CoresDetailComponent implements OnInit {
 
     ngOnInit() {
       setTimeout(() => {
-        this.coreService.refreshById( this.id );
+        //this.coreService.refreshById( this.id );
       });
     }
 }

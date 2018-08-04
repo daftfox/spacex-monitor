@@ -1,8 +1,8 @@
-<section class="scrollable-card row">
+<section class="fixed-height-card row">
 
   <div class="banner"></div>
 
-  <div class="col-3">
+  <div class="left">
     <div class="title">
       <h1>
         <page-title></page-title>
@@ -14,15 +14,41 @@
         </small>
       </h2>
     </div>
+
+    <form class="filters" [formGroup]="filtersForm">
+      <span>Filters</span>
+      <div>
+        <label class="text-muted" for="mission-success">Mission successful</label>
+        <select id="mission-success" [formControlName]="'missionSuccess'">
+          <option [value]="''" selected>All</option>
+          <option [value]="'true'">Successful</option>
+          <option [value]="'false'">Unsuccessful</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="text-muted" for="rocket-filter">Rocket</label>
+        <select id="rocket-filter" [formControlName]="'rocket'">
+          <option [value]="''" selected>All</option>
+          <option *ngFor="let rocket of rockets$ | async"
+                  [value]="rocket.id">{{rocket.name}}</option>
+        </select>
+      </div>
+
+      <button (click)="resetFilters()">Reset</button>
+    </form>
   </div>
 
-  <div class="col-9">
-    <div class="list" [@listAnimation]="launches.length" *ngIf="launches | async as launches">
+  <div class="right">
+    <div class="list"
+         [@listAnimation]="(launches$ | async)"
+         *ngIf="launches$ | async as launches">
       <div class="list-element"
            *ngFor="let launch of launches"
-           [routerLink]="['../', launch.flightNumber]">
+           [routerLink]="[launch.flightNumber]">
         <div class="image">
-          <img [src]="launch.links.missionPatch" [alt]="launch.missionName" />
+          <img [src]="launch.links.missionPatchSmall"
+               [alt]="launch.missionName" />
         </div>
         <div class="content">
           <div class="title">
@@ -42,197 +68,10 @@
       </div>
     </div>
 
-    <div class="spinner"
-         [@fadeAnimation]="length">
-      <spinner *ngIf="length < 1"
-               [size]="'md'"></spinner>
+    <div class="spinner">
+      <spinner *ngIf="loading"
+               [@fadeAnimation] [size]="'md'">
+      </spinner>
     </div>
   </div>
 </section>
-
-
-<!--<div class="col-12">-->
-    <!--<div class="row no-gutters">-->
-        <!--<div class="col-12 col-lg-2 p-0">-->
-            <!--<div class="row pl-2 pr-2">-->
-                <!--<div class="col-12">-->
-                    <!--<strong>Filters:</strong>-->
-
-                    <!--&lt;!&ndash; succesful launch &ndash;&gt;-->
-                    <!--<div class="mt-3">Successful: </div>-->
-                    <!--<div class="row mt-3">-->
-                        <!--<div class="col-4 col-lg-12 form-check">-->
-                            <!--<label class="form-check-label">-->
-                                <!--<input class="form-check-input"-->
-                                        <!--name="successful"-->
-                                        <!--type="radio"-->
-                                        <!--[value]="null"-->
-                                        <!--(change)="refreshLaunches()"-->
-                                        <!--[(ngModel)]="filters.launch_success" />-->
-                                <!--Show all launches-->
-                            <!--</label>-->
-                        <!--</div>-->
-                        <!--<div class="col-4 col-lg-12 form-check">-->
-                            <!--<label class="form-check-label">-->
-                                <!--<input class="form-check-input"-->
-                                        <!--name="successful"-->
-                                        <!--type="radio"-->
-                                        <!--[value]="true"-->
-                                        <!--(change)="refreshLaunches()"-->
-                                        <!--[(ngModel)]="filters.launch_success" />-->
-                                <!--Show successful launches-->
-                            <!--</label>-->
-                        <!--</div>-->
-                        <!--<div class="col-4 col-lg-12 form-check">-->
-                            <!--<label class="form-check-label">-->
-                                <!--<input class="form-check-input"-->
-                                        <!--name="successful"-->
-                                        <!--type="radio"-->
-                                        <!--[value]="false"-->
-                                        <!--(change)="refreshLaunches()"-->
-                                        <!--[(ngModel)]="filters.launch_success" />-->
-                                <!--Show failed launches-->
-                            <!--</label>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--&lt;!&ndash; rocket type &ndash;&gt;-->
-                    <!--<div class="mt-3">Rocket: </div>-->
-                    <!--<div class="row mt-3">-->
-                        <!--<div class="col-4 col-lg-12 form-check">-->
-                            <!--<label class="form-check-label">-->
-                                <!--<input class="form-check-input"-->
-                                        <!--name="launchpad"-->
-                                        <!--type="radio"-->
-                                        <!--[value]="null"-->
-                                        <!--(change)="refreshLaunches()"-->
-                                        <!--[(ngModel)]="filters.rocket_id" />-->
-                                <!--All-->
-                            <!--</label>-->
-                        <!--</div>-->
-                        <!--<div *ngFor="let rocket of rockets | async"-->
-                                <!--class="col-4 col-lg-12 form-check">-->
-                            <!--<label class="form-check-label">-->
-                                <!--<input class="form-check-input"-->
-                                        <!--name="launchpad"-->
-                                        <!--type="radio"-->
-                                        <!--[value]="rocket.id"-->
-                                        <!--(change)="refreshLaunches()"-->
-                                        <!--[(ngModel)]="filters.rocket_id" />-->
-                                <!--{{rocket.name}}-->
-                            <!--</label>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--&lt;!&ndash; sites &ndash;&gt;-->
-                    <!--<div class="mt-3">Launch site: </div>-->
-                    <!--<div class="row mt-3">-->
-                        <!--<div class="col-4 col-lg-12 form-check">-->
-                            <!--<label class="form-check-label">-->
-                                <!--<input class="form-check-input"-->
-                                        <!--name="launchpad"-->
-                                        <!--type="radio"-->
-                                        <!--[value]="null"-->
-                                        <!--(change)="refreshLaunches()"-->
-                                        <!--[(ngModel)]="filters.site_id" />-->
-                                <!--All-->
-                            <!--</label>-->
-                        <!--</div>-->
-                        <!--<div *ngFor="let launchpad of launchpads | async"-->
-                                <!--class="col-4 col-lg-12 form-check">-->
-                            <!--<label class="form-check-label">-->
-                                <!--<input class="form-check-input"-->
-                                        <!--name="launchpad"-->
-                                        <!--type="radio"-->
-                                        <!--[value]="launchpad.id"-->
-                                        <!--(change)="refreshLaunches()"-->
-                                        <!--[(ngModel)]="filters.site_id" />-->
-                                <!--{{launchpad.fullName}}-->
-                            <!--</label>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-12 col-lg-10 p-0">-->
-            <!--<div class="row no-gutters">-->
-                <!--<div class="col-12">-->
-                    <!--<table class="table">-->
-                        <!--<thead class="thead-inverse">-->
-                            <!--<tr>-->
-                                <!--<th class="">Flight num.</th>-->
-                                <!--<th>Mission patch</th>-->
-                                <!--<th class="hidden-sm-down">Rocket</th>-->
-                                <!--<th class="hidden-sm-down">Reusability</th>-->
-                                <!--<th>Success</th>-->
-                                <!--<th class="hidden-sm-down"-->
-                                    <!--width="200px">Payload</th>-->
-                                <!--<th>Date</th>-->
-                            <!--</tr>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                            <!--<tr *ngFor="let launch of launches | async">-->
-                                <!--<th valign="middle"-->
-                                    <!--scope="row"-->
-                                    <!--class="">-->
-                                    <!--<a [routerLink]="['../'+launch.flightNumber]">-->
-                                        <!--{{launch.flightNumber}}-->
-                                    <!--</a>-->
-                                <!--</th>-->
-                                <!--<td style="width: 75px;">-->
-                                    <!--<img *ngIf="launch.links.missionPatch"-->
-                                          <!--class="img-fluid"-->
-                                          <!--src="{{launch.links.missionPatch | https}}"/>-->
-                                <!--</td>-->
-                                <!--<td class="hidden-sm-down" valign="middle">-->
-                                    <!--<a [routerLink]="['/craft','rockets', launch.rocket.id]">{{launch.rocket.name}}</a>-->
-                                <!--</td>-->
-                                <!--<td class="hidden-sm-down"-->
-                                    <!--valign="middle">-->
-                                    <!--<table class="reusability w-100">-->
-                                        <!--<tbody>-->
-                                            <!--<tr>-->
-                                                <!--<td>-->
-                                                    <!--<div>Cores landed:</div>-->
-                                                    <!--<div>Cores reused:</div>-->
-                                                <!--</td>-->
-                                                <!--<td>-->
-                                                    <!--<div>{{landedCores(launch.rocket.firstStage.cores)}}%</div>-->
-                                                    <!--<div>{{reusedCores(launch.rocket.firstStage.cores)}}%</div>-->
-                                                <!--</td>-->
-                                            <!--</tr>-->
-                                        <!--</tbody>-->
-                                    <!--</table>-->
-                                <!--</td>-->
-                                <!--<td>-->
-                                    <!--<i class="success fas"-->
-                                        <!--[ngClass]="{'fa-check': launch.success, 'fa-times': !launch.success}">-->
-                                    <!--</i>-->
-                                <!--</td>-->
-                                <!--<td class="hidden-sm-down"-->
-                                    <!--width="200px">-->
-                                    <!--<table *ngIf="launch.rocket.secondStage.payloads"-->
-                                            <!--class="payloads w-100">-->
-                                        <!--<tbody>-->
-                                            <!--<tr *ngFor="let payload of launch.rocket.secondStage.payloads">-->
-                                                <!--<td>-->
-                                                    <!--<div>Type:</div>-->
-                                                    <!--<div>Id:</div>-->
-                                                <!--</td>-->
-                                                <!--<td>-->
-                                                    <!--<div>{{payload.payload_type}}</div>-->
-                                                    <!--<div>{{payload.payload_id}}</div>-->
-                                                <!--</td>-->
-                                            <!--</tr>-->
-                                        <!--</tbody>-->
-                                    <!--</table>-->
-                                <!--</td>-->
-                                <!--<td valign="middle">{{launch.launchDateUTC | date}}</td>-->
-                            <!--</tr>-->
-                        <!--</tbody>-->
-                    <!--</table>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->

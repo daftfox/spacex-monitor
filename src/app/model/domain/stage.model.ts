@@ -7,6 +7,7 @@ export class Stage {
 
   @JsonProperty('reusable', Boolean, true)
   reusable: boolean = undefined;
+
   @JsonProperty('engines', Number, true)
   numberOfEngines: number = undefined;
 

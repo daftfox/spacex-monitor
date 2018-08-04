@@ -1,20 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import { LaunchService } from '../../../service/launch.service';
-import { LaunchpadService } from '../../../service/launchpad.service';
-import { RocketService } from '../../../service/rocket.service';
 import { Launch } from '../../../model/domain/launch.model';
 import { Launchpad } from '../../../model/domain/launch-pad.model';
 import { Rocket } from '../../../model/domain/rocket.model';
 import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators';
+import {distinctUntilChanged, share, startWith, switchMap, tap} from 'rxjs/operators';
 import {listAnimation} from '../../../animation/list.animation';
 import {fadeAnimation} from '../../../animation/fade.animation';
+import {RocketService} from '../../../service/rocket.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import {combineLatest} from 'rxjs/internal/observable/combineLatest';
 
 @Component({
   selector: 'all-launches-component',
   templateUrl: './all-launches.component.html',
   styleUrls: [
-    './all-launches.component.css'
+    './all-launches.component.scss'
   ],
   animations: [
     listAnimation,
@@ -23,52 +24,56 @@ import {fadeAnimation} from '../../../animation/fade.animation';
 })
 
 export class AllLaunchesComponent implements OnInit {
-  launches: Observable<Launch[]>;
-  launchpads: Observable<Launchpad[]>;
-  rockets: Observable<Rocket[]>;
-  length = 0;
 
-  filters = {
-    site_id: null,
-    launch_success: null,
-    rocket_id: null
-  };
+  // Data observables
+  public launches$:                      Observable<Launch[]>;
+  public launchpads$:                    Observable<Launchpad[]>;
+  public rockets$:                       Observable<Rocket[]>;
+
+  // filter observables
+  public selectedRocketFilter$:          Observable<string>;
+  public selectedMissionSuccessFilter$:  Observable<string>;
+
+  public filters:                        Object;
+  public filtersForm:                    FormGroup;
+  public loading                         = false;
 
   constructor(private launchService: LaunchService,
-              private launchpadService: LaunchpadService,
+              // private launchpadService: LaunchpadService,
               private rocketService: RocketService) {
-
-    this.launches = this.launchService.get();
-    this.rockets = this.rocketService.get();
-    this.launchpads = this.launchpadService.get();
-    this.launchService.get().pipe(
-      map( ( launches: Launch[]) => launches.length )
-    ).subscribe(
-      length => this.length = length
-    );
+    this.filters = this.launchService.collectParams();
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.launchService.refresh();
-      this.rocketService.refresh();
-      this.launchpadService.refresh();
-    }, 10);
+    this.filtersForm =  new FormGroup({
+      rocket:           new FormControl(this.filters['rocket_id'] || ''),
+      missionSuccess:   new FormControl(this.filters['launch_success'] || ''),
+    });
+
+    this.selectedRocketFilter$ = this.filtersForm.get('rocket').valueChanges
+      .pipe(
+        startWith( this.filters['rocket_id'] || '' ),
+        distinctUntilChanged()
+      );
+
+    this.selectedMissionSuccessFilter$ = this.filtersForm.get('missionSuccess').valueChanges
+      .pipe(
+        startWith( this.filters['launch_success'] || '' ),
+        distinctUntilChanged()
+      );
+
+    this.launches$ = combineLatest( this.selectedMissionSuccessFilter$, this.selectedRocketFilter$)
+      .pipe(
+        tap( _ => this.loading = true ),
+        switchMap( params => this.launchService.get( { launch_success: params[0], rocket_id: params[1] } ) ),
+        tap( _ => this.loading = false ),
+        share()
+      );
+
+    this.rockets$ = this.rocketService.get();
   }
 
-  reusedCores( cores: any ): number {
-    const numberOfCores = cores.length;
-    const numberOfReusedCores = cores.filter((core) => core.reused).length;
-    return Math.round((numberOfReusedCores / numberOfCores) * 100);
-  }
-
-  landedCores( cores: any ): number {
-    const numberOfCores = cores.length;
-    const numberOfLandedCores = cores.filter( ( core ) => core.land_success ).length;
-    return Math.round((numberOfLandedCores / numberOfCores) * 100);
-  }
-
-  refreshLaunches() {
-
+  public resetFilters(): void {
+    this.filtersForm.setValue( { rocket: '', missionSuccess: '' } );
   }
 }

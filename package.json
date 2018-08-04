@@ -28,9 +28,12 @@
     "@angular/service-worker": "^6.0.7",
     "bootstrap": "^4.1.2",
     "core-js": "^2.4.1",
+    "jasmine-marbles": "^0.3.1",
     "jquery": "^3.3.1",
     "json2typescript": "^1.0.5",
+    "moment": "^2.22.2",
     "ngx-embed-video": "^0.3.0",
+    "ngx-youtube-player": "^6.0.0",
     "popper.js": "^1.14.3",
     "rxjs": "^6.2.1",
     "zone.js": "^0.8.26"

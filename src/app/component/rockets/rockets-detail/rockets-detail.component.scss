@@ -1,0 +1,61 @@
+.spinner {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+
+.heading {
+  grid-template-columns: 266px 1fr;
+  grid-template-rows: auto 600px;
+  grid-gap: 1rem;
+  grid-template-areas:
+    ". title"
+    "image description";
+
+  .image {
+    grid-area: image;
+    border-radius: 3px;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    overflow: hidden;
+  }
+
+  .title {
+    grid-area: title;
+    padding: 1rem 0;
+  }
+
+  .description {
+    grid-area: description;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    grid-template-areas:
+      "text blueprint";
+
+    .blueprint {
+      grid-area: blueprint;
+    }
+
+    p {
+      grid-area: text;
+    }
+  }
+
+  payload-weights {
+    grid-area: payload-weights;
+  }
+}
+
+.content {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20rem;
+  grid-template-areas:
+    "details";
+
+  .details {
+    grid-area: details;
+  }
+}

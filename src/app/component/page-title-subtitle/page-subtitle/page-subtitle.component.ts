@@ -10,11 +10,11 @@ import {Observable} from 'rxjs';
 })
 
 export class PageSubtitleComponent implements OnInit {
-  subtitle: Observable<string>;
+  subtitle$: Observable<string>;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute) {
-    this.subtitle = this.activatedRoute.data.pipe(
+    this.subtitle$ = this.activatedRoute.data.pipe(
       map( data => data.pageSubtitle )
     );
 

@@ -1,0 +1,111 @@
+.container {
+  //display: grid;
+  height: 100%;
+  //grid-template-columns: 1fr;
+  //grid-template-rows: auto 1fr;
+  //grid-gap: 1rem;
+  //grid-template-areas:
+  //  "title"
+  //  "blueprint";
+
+
+  //>heading {
+  //  grid-area: title;
+  //}
+
+  >.blueprint {
+    grid-area: blueprint;
+    height: 100%;
+    position: relative;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+    font-family: monospace;
+    padding: 1rem;
+    font-size: .8em;
+    display: grid;
+    grid-gap: .5rem;
+    color: white;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1em;
+    grid-template-columns: 37% auto auto;
+    grid-template-areas:
+      "image . specs"
+      "image . specs"
+      "image height specs"
+      "image . specs"
+      "diameter . specs";
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: .6;
+      background-image: url('/assets/images/blueprint-bg.png');
+      border: 3px solid #8cbadb;
+      border-radius: 3px;
+    }
+
+    .codename {
+      position: absolute;
+      right: 1rem;
+      bottom: .6rem;
+      z-index: 1;
+    }
+
+    [title='Height'] {
+      grid-area: height;
+      z-index: 1;
+    }
+
+    [title='Diameter'] {
+      grid-area: diameter;
+      z-index: 1;
+    }
+
+    .specs {
+      grid-area: specs;
+      font-size: 1.1em;
+      color: darken(white, 15%);
+      white-space: nowrap;
+      z-index: 1;
+
+      i {
+        margin-right: 1em;
+        width: 1em;
+      }
+
+      >div[title] {
+        margin-bottom: 4px;
+      }
+
+      >table {
+        width: 100%;
+
+        tr {
+          line-height: .9;
+
+          td:last-child:not(:first-child) {
+            text-align: right;
+            white-space: normal;
+          }
+        }
+      }
+    }
+
+    >div[title='Diameter'] {
+      text-align: center;
+      z-index: 1;
+    }
+
+    img {
+      grid-area: image;
+      height: 100%;
+      margin: 0 auto;
+      z-index: 1;
+    }
+  }
+
+}

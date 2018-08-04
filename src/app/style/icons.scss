@@ -13,5 +13,5 @@ div:hover>i[class$="-icon"] {
 }
 
 div.active>i[class$="-icon"] {
-  background-color: $sidebarButtonFontColor--hover;
+  background-color: $sidebarButtonFontColor--active;
 }

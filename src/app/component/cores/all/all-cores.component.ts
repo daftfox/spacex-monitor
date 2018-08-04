@@ -15,12 +15,12 @@ export class AllCoresComponent implements OnInit {
     cores: Observable<CoreDetails[]>;
 
     constructor(private coreService: CoreService) {
-        this.cores = this.coreService.get();
+        //this.cores = this.coreService.get();
     }
 
     ngOnInit() {
       setTimeout(() => {
-        this.coreService.refresh();
+        //this.coreService.refresh();
       });
     }
 }

@@ -1,8 +1,9 @@
-import {Injectable, Type} from '@angular/core';
+import {Injectable} from '@angular/core';
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import { Launchpad } from '../model/domain/launch-pad.model';
-import {Capsule} from '../model/domain/capsule.model';
+import {catchError, share} from 'rxjs/operators';
+import {Observable} from 'rxjs/internal/Observable';
 
 
 /**
@@ -13,9 +14,17 @@ import {Capsule} from '../model/domain/capsule.model';
  */
 @Injectable()
 export class LaunchpadService extends ApiService<Launchpad> {
-
   constructor( private httpClient: HttpClient ) {
     super(httpClient, Launchpad);
     this.API_BASE_URL = `${ this.API_BASE_URL }/launchpads`;
+    this.LOCALSTORAGE_KEY = 'launches-filter';
+  }
+
+  public getById( id: string ): Observable<Launchpad> {
+    return this.getByIdRequest( id )
+      .pipe(
+        share(),
+        catchError(this.handleError)
+      );
   }
 }

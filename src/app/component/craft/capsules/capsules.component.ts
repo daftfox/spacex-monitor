@@ -16,15 +16,15 @@ export class CapsulesComponent {
     capsuleSub: any;
 
     constructor(private capsuleService: CapsuleService) {
-        this.getCapsules();
+        //this.getCapsules();
     }
 
-    private getCapsules(): void {
-        if (this.capsuleSub) this.capsuleSub.unsubscribe();
-        this.capsuleService.get()
-            .subscribe(
-              ( capsules: Capsule[] ) => this.capsules = capsules,
-                err => { console.log(err); }
-            );
-    }
+    // private getCapsules(): void {
+    //     if (this.capsuleSub) this.capsuleSub.unsubscribe();
+    //     this.capsuleService.get()
+    //         .subscribe(
+    //           ( capsules: Capsule[] ) => this.capsules = capsules,
+    //             err => { console.log(err); }
+    //         );
+    // }
 }

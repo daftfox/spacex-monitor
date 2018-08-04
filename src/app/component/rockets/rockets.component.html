@@ -1,0 +1,47 @@
+<section class="fixed-height-card row">
+
+  <div class="banner"></div>
+
+  <div class="left">
+    <div class="title">
+      <h1>
+        <page-title></page-title>
+      </h1>
+
+      <h2 class="text-muted">
+        <small>
+          <page-subtitle></page-subtitle>
+        </small>
+      </h2>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="list"
+         [@listAnimation]="length$"
+         *ngIf="rockets$ | async as rockets">
+      <div class="list-element"
+           *ngFor="let rocket of rockets"
+           [routerLink]="[rocket.id]">
+        <div class="image">
+          <img src="assets/images/webp/{{rocket.id}}-500px.webp" />
+        </div>
+        <div class="content">
+          <div class="title">
+            <h3>{{rocket.name}}</h3>
+          </div>
+          <div class="summary">
+            <p>{{rocket.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spinner">
+      <spinner *ngIf="!(rockets$ | async)"
+               [@fadeAnimation] [size]="'md'">
+      </spinner>
+    </div>
+  </div>
+</section>
+

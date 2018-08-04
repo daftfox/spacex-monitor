@@ -15,7 +15,7 @@
                         type="radio"
                         [value]="null"
                         (change)="getLaunches()"
-                        [(ngModel)]="filters.successful" />
+                        [(ngModel)]="filtersForm.successful" />
                 Show all launches
             </label>
         </div>
@@ -26,7 +26,7 @@
                         type="radio"
                         [value]="true"
                         (change)="getLaunches()"
-                        [(ngModel)]="filters.successful" />
+                        [(ngModel)]="filtersForm.successful" />
                 Show successful launches
             </label>
         </div>
@@ -37,7 +37,7 @@
                         type="radio"
                         [value]="false"
                         (change)="getLaunches()"
-                        [(ngModel)]="filters.successful" />
+                        [(ngModel)]="filtersForm.successful" />
                 Show failed launches
             </label>
         </div>
@@ -53,7 +53,7 @@
                         type="radio"
                         [value]="null"
                         (change)="getLaunches()"
-                        [(ngModel)]="filters.selectedRocket" />
+                        [(ngModel)]="filtersForm.selectedRocket" />
                 All
             </label>
         </div>
@@ -65,7 +65,7 @@
                         type="radio"
                         [value]="rocket.id"
                         (change)="getLaunches()"
-                        [(ngModel)]="filters.selectedRocket" />
+                        [(ngModel)]="filtersForm.selectedRocket" />
                 {{rocket.name}}
             </label>
         </div>
@@ -81,7 +81,7 @@
                         type="radio"
                         [value]="null"
                         (change)="getLaunches()"
-                        [(ngModel)]="filters.selectedLaunchpad" />
+                        [(ngModel)]="filtersForm.selectedLaunchpad" />
                 All
             </label>
         </div>
@@ -93,7 +93,7 @@
                         type="radio"
                         [value]="launchpad.id"
                         (change)="getLaunches()"
-                        [(ngModel)]="filters.selectedLaunchpad" />
+                        [(ngModel)]="filtersForm.selectedLaunchpad" />
                 {{launchpad.full_name}}
             </label>
         </div>

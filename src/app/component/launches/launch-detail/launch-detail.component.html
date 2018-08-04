@@ -1,0 +1,139 @@
+<section class="expanded-card">
+  <div class="banner"></div>
+
+  <div class="heading"
+       [@fadeAnimation]
+       *ngIf="(launchData$ | async)?.launch as launch">
+    <div class="image">
+      <img [src]="launch.links.missionPatch" [alt]="launch.missionName" />
+    </div>
+    <div class="title console">
+      <h1>{{launch.missionName}}</h1>
+      <div>
+        <i class="fas fa-calendar-alt"></i>
+        <span>{{launch.launchDateUTC | moment: 'LLLL' | capitalize}}</span>
+      </div>
+      <div>
+        <i class="fas fa-rocket"></i>
+        <a [routerLink]="['/', 'rockets', launch.rocket.id]">{{launch.rocket.name}}</a>
+      </div>
+      <div>
+        <i class="success fas"
+           [ngClass]="{'fa-check': launch.success, 'fa-times': !launch.success}">
+        </i>
+        <span>{{ launch.success ? 'Successful launch' : 'Launch failure' }}</span>
+      </div>
+      <div>
+        <i class="fas fa-map-marked"></i>
+        <span>{{launch.launchSite.longName}}</span>
+      </div>
+      <div class="links text-muted">
+        <a [href]="launch.links.wikipedia"
+           target="_blank"
+           title="Wikipedia Article"
+           *ngIf="launch.links.wikipedia">
+          <i class="fab fa-wikipedia-w"></i>
+        </a>
+        <a [href]="launch.links.article"
+           target="_blank"
+           title="News Article"
+           *ngIf="launch.links.article">
+          <i class="far fa-newspaper"></i>
+        </a>
+        <a [href]="launch.links.presskit | https"
+           target="_blank"
+           title="Presskit"
+           *ngIf="launch.links.presskit">
+          <i class="fas fa-file-invoice"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <p class="details pt-5"
+       [@fadeAnimation]
+       *ngIf="(launchData$ | async)?.launch as launch">
+      {{launch.details}}
+    </p>
+
+    <div class="payloads"
+         *ngIf="(launchData$ | async)?.launch as launch">
+      <h3>Payload(s):</h3>
+      <aside class="list"
+             [@listAnimation]="(launch$ | async)">
+        <div class="list-element"
+             *ngFor="let payload of launch.rocket.secondStage.payloads">
+          <div class="content">
+            <div class="title">
+              <h3>{{payload.id}}</h3>
+              <div>{{payload.type}}</div>
+              <div *ngIf="payload.massKg">{{payload.massKg | number: '1.':'nl'}}kg</div>
+            </div>
+            <div class="summary">
+              <h4>Customer(s): <span *ngFor="let customer of payload.customers; let last = last">{{customer}}<span *ngIf="!last">,</span></span></h4>
+              <div class="details">
+                <div *ngIf="payload.orbitParams.apoapsis || payload.orbitParams.periapsis || payload.orbitParams.inclination || payload.orbitParams.eccentricity">
+                  <h5>Orbital parameters:</h5>
+                  <ul>
+                    <li *ngIf="payload.orbitParams.apoapsis">Apoapsis: {{payload.orbitParams.apoapsis | number: '1.':'nl'}}km</li>
+                    <li *ngIf="payload.orbitParams.periapsis">Periapsis: {{payload.orbitParams.periapsis | number: '1.':'nl'}}km</li>
+                    <li *ngIf="payload.orbitParams.eccentricity">Eccentricity: {{payload.orbitParams.eccentricity}}</li>
+                    <li *ngIf="payload.orbitParams.inclination">Inclination: {{payload.orbitParams.inclination}}&deg;</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!--<div class="map"-->
+         <!--[@fadeAnimation]-->
+         <!--*ngIf="(launchData$ | async)?.launchpad as launchpad">-->
+      <!--<agm-map [latitude]="launchpad.location.latitude"-->
+               <!--[longitude]="launchpad.location.longitude"-->
+               <!--[zoom]="16"-->
+               <!--[draggable]="false"-->
+               <!--[mapTypeId]="'satellite'">-->
+        <!--<agm-marker [latitude]="launchpad.location.latitude"-->
+                    <!--[longitude]="launchpad.location.longitude">-->
+          <!--<agm-info-window [isOpen]="true">-->
+            <!--<div class="info-window">-->
+              <!--<h1>{{launchpad.location.name}}</h1>-->
+              <!--<span>Rockets launched:</span>-->
+              <!--<ul>-->
+                <!--<li *ngFor="let rocket of launchpad.vehiclesLaunched">-->
+                  <!--{{rocket}}-->
+                <!--</li>-->
+              <!--</ul>-->
+              <!--<span>{{launchpad.details}}</span>-->
+            <!--</div>-->
+          <!--</agm-info-window>-->
+        <!--</agm-marker>-->
+      <!--</agm-map>-->
+      <!--<div class="text-muted">-->
+        <!--<span class="console">Longitude: {{launchpad.location.longitude}}</span>-->
+        <!--<span class="console">Latitude: {{launchpad.location.latitude}}</span>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="video"-->
+         <!--[@fadeAnimation]-->
+         <!--*ngIf="(launchData$ | async)?.launch as launch">-->
+      <!--<youtube-player-->
+        <!--[height]="'300px'"-->
+        <!--[videoId]="(videoId$ | async)">-->
+      <!--</youtube-player>-->
+    <!--</div>-->
+  </div>
+
+  <div class="spinner">
+    <spinner *ngIf="loading"
+             [@fadeAnimation] [size]="'md'">
+    </spinner>
+  </div>
+
+</section>

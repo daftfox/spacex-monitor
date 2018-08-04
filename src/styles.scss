@@ -1,16 +1,4 @@
 @import './app/style/bundle';
-@import '../node_modules/bootstrap/scss/functions';
-
-$enable-grid-classes: true;
-$grid-columns: 12 !default;
-$grid-gutter-width: 30px;
-@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
-@include _assert-starts-at-zero($grid-breakpoints);
-
-@import '../node_modules/bootstrap/scss/mixins/breakpoints';
-@import '../node_modules/bootstrap/scss/mixins/grid-framework';
-@import '../node_modules/bootstrap/scss/mixins/grid';
-@import '../node_modules/bootstrap/scss/grid';
 
 html {
   -webkit-box-sizing: border-box;
@@ -64,6 +52,21 @@ h3 {
   font-size: 1.75rem;
 }
 
+//a[target="_blank"] {
+//  position: relative;
+//  margin-right: 1em;
+//
+//  &::after {
+//    content: '\f35d';
+//    font-size: .6em;
+//    font-family: 'Font Awesome 5 Free';
+//    font-weight: 900;
+//    position: absolute;
+//    top: .35em;
+//    left: calc(100% + .3em);
+//  }
+//}
+
 h1,
 a {
   color: $detailTextColor;
@@ -90,4 +93,17 @@ h2, h3, h4 {
   &.fa-times {
     color: $dangerTextColor;
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: $contentCardBackgroundColor;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $secondaryTextColor;
+  border-radius: 2px;
+  padding: 5px 0;
 }

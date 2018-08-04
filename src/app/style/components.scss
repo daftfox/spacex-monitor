@@ -1,4 +1,4 @@
-.scrollable-card,
+.fixed-height-card,
 .expanded-card {
   position: absolute;
   margin: 100px 100px;
@@ -23,131 +23,239 @@
     background: linear-gradient(135deg, $detailTextColor 0%,lighten($detailTextColor, 10%) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$detailTextColor}', endColorstr='#{lighten($detailTextColor, 10%)}',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
-    box-shadow: 0px 6px 5px -2px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 5px -2px rgba(0,0,0,0.3);
   }
 }
 
+// ------------------ Expanded card ------------------
 .expanded-card {
-  overflow: auto;
   padding: 100px 75px;
+  display: grid;
+  min-height: calc(100vh - 200px);
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  grid-gap: 2em;
+  grid-template-areas:
+    "heading"
+    "content";
 
-  .images {
-    width: 100%;
-    margin-top: 3em;
+  >.heading {
+    display: grid;
+    grid-area: heading;
+    grid-template-columns: 15em 1fr;
+    grid-gap: 1.5em;
+    grid-template-areas:
+      "image title";
 
-    >div {
-      padding: 0 15px;
-      width: 33%;
-      display: inline-block;
-      position: relative;
+    .image {
+      grid-area: image;
 
-      >img {
-        border-radius: 3px;
+      img {
         max-width: 100%;
         height: auto;
-        box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+      }
+    }
+
+    .title {
+      grid-area: title;
+      position: relative;
+      padding: 1em 1em 3em;
+
+      &.console {
+        background-color: darken($contentCardBackgroundColor, 5%);
+        box-shadow: inset 0px 0px 14px 0px rgba(0,0,0,0.4);
+        border-radius: 3px;
       }
 
-      >div {
+      .links {
         position: absolute;
-        top: 100%;
-        left: 1em;
-        right: 1em;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1em;
+        background-color: darken($contentCardBackgroundColor, 10%);
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+
+        >a:not(:last-child) {
+          margin-right: 5px;
+        }
       }
+
+      >div:not(.links) {
+        color: $secondaryTextColor;
+        position: relative;
+
+        a,
+        a:visited,
+        a:link {
+          color: lighten($secondaryTextColor, 20%);
+        }
+
+        a:hover {
+          color: $secondaryTextColor;
+        }
+
+        i {
+          width: 1em;
+          margin-right: 1em;
+
+          &:not(.success) {
+            color: lighten($secondaryTextColor, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  >.content {
+    grid-area: content;
+
+    .images {
+      width: 100%;
+      margin-top: 3em;
+
+      >div {
+        padding: 0 15px;
+        width: 33%;
+        display: inline-block;
+        position: relative;
+
+        >img {
+          border-radius: 3px;
+          max-width: 100%;
+          height: auto;
+          box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+        }
+
+        >div {
+          position: absolute;
+          top: 100%;
+          left: 1em;
+          right: 1em;
+        }
+      }
+    }
+
+    .list {
+      height: 11em;
+      padding: 0 20px 10px 10px;
+      margin: 0 -20px -10px -10px;
     }
   }
 }
 
-.scrollable-card {
+// ------------------ Fixed height card ------------------
+.fixed-height-card {
   height: calc(100vh - 200px);
   padding: 100px 75px 25px;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "left left right right right right";
 
   .spinner {
-    height: calc(100vh - 325px);
-    width: 100%;
-    display: grid;
-    place-content: center;
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc( 65% - 50px);
+    pointer-events: none;
   }
 
-  >.col-3 {
+  .left {
+    grid-area: left;
     height: 5.5rem;
   }
 
-  >.col-9 {
-    margin-top: -25px;
+  .right {
+    grid-area: right;
 
     .list {
       height: calc(100vh - 325px);
-      overflow-y: auto;
-      overflow-x: visible;
       padding: 10px 20px 10px 10px;
+      margin-top: -25px;
+    }
+  }
+}
 
-      .list-element {
-        background-color: lighten($contentCardBackgroundColor, 1%);
-        height: 8em;
-        padding: 1em;
-        display: flex;
-        margin: 10px 0;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-        transition: transform 150ms ease-in-out;
-        cursor: pointer;
-        border-radius: 2px;
+// ------------------ List ------------------
+.list {
+  overflow-y: auto;
+  overflow-x: visible;
 
-        &:hover {
-          transform: scale(1.03);
+  .list-element {
+    background-color: lighten($contentCardBackgroundColor, 1%);
+    height: 8em;
+    padding: 1em;
+    display: flex;
+    margin: 10px 0;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    transition: transform 150ms ease-in-out;
+    cursor: pointer;
+    border-radius: 2px;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    .image {
+      display: flex;
+      width: 6em;
+
+      img {
+        width: 100%;
+        border-radius: 3px;
+      }
+    }
+
+    .content {
+      display: flex;
+      width: calc(100% - 6em);
+      height: 6em;
+      padding-left: 10px;
+
+      .title {
+        width: 10em;
+
+        h3 {
+          font-size: 1.3em;
         }
 
-        &:focus {
-          outline: none;
+        >div {
+          color: $secondaryTextColor;
+          font-size: .8em;
+          position: relative;
+
+          i {
+            position: absolute;
+            left: 5em;
+            top: .40em;
+          }
         }
+      }
 
-        .image {
-          display: flex;
-          width: 6em;
+      .summary {
+        width: calc(100% - 10em);
+        padding-left: 10px;
 
-          img {
-            width: 100%;
+        .details {
+          h5 {
+            margin-bottom: .2rem;
+          }
+          ul {
+            margin-top: 0;
+            font-size: .65em;
           }
         }
 
-        .content {
-          display: flex;
-          width: calc(100% - 6em);
+        p {
           height: 6em;
-          padding-left: 10px;
-
-          .title {
-            width: 10em;
-
-            h3 {
-              font-size: 1.3em;
-            }
-
-            div {
-              color: $secondaryTextColor;
-              font-size: .8em;
-              position: relative;
-
-              i {
-                position: absolute;
-                left: 5em;
-                top: .35em;
-              }
-            }
-          }
-
-          .summary {
-            display: flex;
-            width: calc(100% - 10em);
-            padding-left: 10px;
-
-            p {
-              height: 6em;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              color: $secondaryTextColor;
-            }
-          }
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $secondaryTextColor;
         }
       }
     }

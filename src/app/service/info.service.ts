@@ -3,7 +3,6 @@ import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import {SpacexInfo} from '../model/domain/spacex-info.model';
 
-
 /**
  * @name InfoService
  * @description
@@ -16,5 +15,6 @@ export class InfoService extends ApiService<SpacexInfo> {
   constructor( private httpClient: HttpClient ) {
     super(httpClient, SpacexInfo);
     this.API_BASE_URL = `${ this.API_BASE_URL }/info`;
+    this.LOCALSTORAGE_KEY = 'info';
   }
 }

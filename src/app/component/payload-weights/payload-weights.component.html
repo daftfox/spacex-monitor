@@ -1,0 +1,15 @@
+<article>
+  <div class="heading">
+    <h3>Maximum payload weight</h3>
+    <small class="text-muted">The maximum weight this model rocket is able to lift to specific orbits.</small>
+  </div>
+  <orbits-visualized></orbits-visualized>
+
+  <div class="payload-weights">
+    <div class="weight"
+         *ngFor="let payloadWeight of payloadWeights">
+      <span class="name" [ngClass]="{'uppercase': payloadWeight.id.length <= 3, 'capitalize': payloadWeight.id.length > 3}">{{payloadWeight.id}}</span>
+      <span class="mass">{{payloadWeight.kg | number: '1.':'nl'}}kg</span>
+    </div>
+  </div>
+</article>

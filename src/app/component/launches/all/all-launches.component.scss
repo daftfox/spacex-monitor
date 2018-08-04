@@ -1,0 +1,75 @@
+.table td, .table tr th {
+    vertical-align: middle;
+}
+
+.payloads td:nth-child(1) {
+    width: 25%;
+}
+
+.payloads td:nth-child(2) {
+    width: 75%;
+}
+
+.reusability td:nth-child(1) {
+    width: 75%;
+}
+
+.reusability td:nth-child(2) {
+    width: 25%;
+    text-align: right;
+}
+
+.left {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "title"
+    "filters";
+
+  .title {
+    grid-area: title;
+  }
+
+  .filters {
+    grid-area: filters;
+    display: grid;
+    grid-gap: .5em;
+    grid-template-rows: 1.5em 1.5em;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "mission-success"
+      "rocket";
+
+    button {
+      height: 24px;
+      border-radius: 3px;
+    }
+
+    div:first-child {
+      grid-area: mission-success;
+    }
+
+    div:last-child {
+      grid-area: rocket;
+    }
+
+    >div {
+      display: grid;
+      grid-gap: 1em;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "label dropdown";
+
+      label {
+        grid-area: label;
+      }
+
+      select {
+        height: 24px;
+        grid-area: dropdown;
+        border-radius: 3px;
+      }
+    }
+  }
+}

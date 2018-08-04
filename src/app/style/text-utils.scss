@@ -1,5 +1,22 @@
 .text-muted {
   color: $secondaryTextColor;
+
+  a:link,
+  a:visited {
+    color: inherit;
+  }
+
+  a:hover {
+    color: darken($secondaryTextColor, 5%);
+  }
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .m-0 {
@@ -288,4 +305,8 @@
 .pl-5,
 .px-5 {
   padding-left: 3rem;
+}
+
+.console {
+  font-family: "Lucida Console", Monaco, monospace;
 }

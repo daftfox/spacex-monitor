@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { InfoService } from '../../service/info.service';
-import {SpacexInfo} from '../../model/domain/spacex-info.model';
+import { SpacexInfo } from '../../model/domain/spacex-info.model';
+import { Observable } from 'rxjs/internal/Observable';
+import {map, tap} from 'rxjs/operators';
 
 @Component({
     selector: 'home-component',
@@ -11,14 +13,12 @@ import {SpacexInfo} from '../../model/domain/spacex-info.model';
 })
 
 export class HomeComponent {
-    spacex: SpacexInfo;
-    infoSub: any;
+    spacex$: Observable<SpacexInfo>;
 
-    constructor(private infoService: InfoService) {
-        this.infoSub = this.infoService.get()
-            .subscribe(
-              ( spacexInfo: SpacexInfo[] ) => this.spacex = spacexInfo[0] ,
-                err => { console.log(err); }
-            );
+    constructor( private infoService: InfoService ) {
+        this.spacex$ = this.infoService.get()
+          .pipe(
+            map( ( info: SpacexInfo ) => info )
+          );
     }
 }

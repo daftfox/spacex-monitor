@@ -10,11 +10,11 @@ import {Observable} from 'rxjs';
 })
 
 export class PageTitleComponent implements OnInit {
-  title: Observable<string>;
+  title$: Observable<string>;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute) {
-    this.title = this.activatedRoute.data.pipe(
+    this.title$ = this.activatedRoute.data.pipe(
       map( data => data.pageTitle )
     );
 

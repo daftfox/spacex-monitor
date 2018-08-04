@@ -1,0 +1,41 @@
+@import "../../style/variables";
+
+article {
+  display: grid;
+  grid-template-columns: auto 19rem;
+  grid-template-rows: auto auto;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "title title"
+    "weights orbits";
+  height: 100%;
+
+  .heading {
+    grid-area: title;
+  }
+
+  orbits-visualized {
+    grid-area: orbits;
+  }
+
+  .payload-weights {
+    grid-area: weights;
+    font-size: .8em;
+
+    .weight {
+      margin-bottom: .5rem;
+      display: grid;
+      grid-gap: 1rem;
+      grid-template-columns: 4rem auto;
+      grid-template-areas: "name mass";
+
+      .name {
+        grid-area: name;
+      }
+
+      .mass {
+        grid-area: mass;
+      }
+    }
+  }
+}

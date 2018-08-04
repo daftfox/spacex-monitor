@@ -22,7 +22,7 @@
               "src/manifest.json"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
             ],
             "scripts": []
           },
@@ -126,11 +126,11 @@
   "defaultProject": "spacex-monitor",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
+      "prefix": "",
       "styleext": "scss"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": ""
     }
   }
 }
