@@ -2,13 +2,13 @@
 
 article {
   display: grid;
-  grid-template-columns: auto 19rem;
-  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 40%;
+  grid-template-rows: auto 1fr;
   grid-gap: 1rem;
+  height: 100%;
   grid-template-areas:
     "title title"
     "weights orbits";
-  height: 100%;
 
   .heading {
     grid-area: title;
@@ -21,20 +21,46 @@ article {
   .payload-weights {
     grid-area: weights;
     font-size: .8em;
+    width: 100%;
 
     .weight {
       margin-bottom: .5rem;
+      width: 100%;
       display: grid;
       grid-gap: 1rem;
-      grid-template-columns: 4rem auto;
-      grid-template-areas: "name mass";
+      grid-template-columns: 1fr 25px auto;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "name icon mass";
 
       .name {
         grid-area: name;
       }
 
+      .icon {
+        grid-area: icon;
+        width: 25px;
+        height: 25px;
+        background-size: cover;
+
+        &.mars {
+           background-image: url("/assets/images/mars-small.png");
+         }
+
+        &.pluto {
+          background-image: url("/assets/images/pluto-small.png");
+        }
+
+        &.leo,
+        &.gto,
+        &.geo {
+          background-image: url("/assets/images/earth-small.png");
+        }
+      }
+
       .mass {
         grid-area: mass;
+        text-align: right;
       }
     }
   }

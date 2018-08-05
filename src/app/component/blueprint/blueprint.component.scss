@@ -1,20 +1,10 @@
 .container {
-  //display: grid;
+  min-width: 22em;
   height: 100%;
-  //grid-template-columns: 1fr;
-  //grid-template-rows: auto 1fr;
-  //grid-gap: 1rem;
-  //grid-template-areas:
-  //  "title"
-  //  "blueprint";
-
-
-  //>heading {
-  //  grid-area: title;
-  //}
 
   >.blueprint {
     grid-area: blueprint;
+    min-height: 45em;
     height: 100%;
     position: relative;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
@@ -72,13 +62,10 @@
       white-space: nowrap;
       z-index: 1;
 
-      i {
-        margin-right: 1em;
-        width: 1em;
-      }
-
       >div[title] {
-        margin-bottom: 4px;
+        >i {
+          width: 2em;
+        }
       }
 
       >table {

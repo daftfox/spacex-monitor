@@ -21,6 +21,64 @@
   grid-area: details;
 }
 
+.success-ribbon {
+  position: absolute;
+  text-align: center;
+  top: -5px;
+  right: 3em;
+  height: 125px;
+  width: 5em;
+  padding: 3em 1em 1em;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2.5em;
+    width: 0;
+    height: 0;
+    border-top: 2.5em solid;
+  }
+
+  &::after {
+    right: 0;
+    border-left: 2.5em solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-right: 2.5em solid transparent;
+  }
+
+  &.true {
+
+    &::before,
+    &::after {
+      border-top-color: $successTextColor;
+    }
+
+    background-color: $successTextColor;
+    color: darken($successTextColor, 30%);
+  }
+
+  &.false {
+
+    &::before,
+    &::after {
+      border-top-color: $dangerTextColor;
+    }
+
+    background-color: $dangerTextColor;
+    color: darken($dangerTextColor, 30%);
+  }
+
+  i {
+    font-size: 3em;
+  }
+}
+
 
 .content {
   display: grid;

@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { YoutubePlayerModule } from 'ngx-youtube-player';
 import nl from '@angular/common/locales/nl';
 import { registerLocaleData } from '@angular/common';
+import { SlideshowModule } from 'ng-simple-slideshow';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
@@ -42,8 +43,7 @@ import { RocketService } from './service/rocket.service';
 import { InfoService } from './service/info.service';
 
 import { SafePipe } from './pipe/safe.pipe';
-import { MillionPipe } from './pipe/million.pipe';
-import { ThousandPipe } from './pipe/thousand.pipe';
+import { DivisionPipe } from './pipe/division.pipe';
 import { CapitalizePipe } from './pipe/capitalize.pipe';
 import { MomentPipe } from './pipe/moment.pipe';
 import { CardinalPipe } from './pipe/cardinal.pipe';
@@ -56,8 +56,7 @@ import {AppRoutingModule} from './app-routing.module';
   declarations: [
     SafePipe,
     HttpsPipe,
-    MillionPipe,
-    ThousandPipe,
+    DivisionPipe,
     CardinalPipe,
     CapitalizePipe,
     MomentPipe,
@@ -85,6 +84,7 @@ import {AppRoutingModule} from './app-routing.module';
   ],
   imports: [
     HttpClientModule,
+    SlideshowModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

@@ -5,18 +5,22 @@
 }
 
 .heading {
-  grid-template-columns: 266px 1fr;
-  grid-template-rows: auto 600px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto;
   grid-gap: 1rem;
   grid-template-areas:
-    ". title"
-    "image description";
+    "title title"
+    "image description"
+    "image payload-weights";
 
   .image {
     grid-area: image;
     border-radius: 3px;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
-    overflow: hidden;
+  }
+
+  payload-weights {
+    grid-area: payload-weights;
   }
 
   .title {
@@ -27,35 +31,50 @@
   .description {
     grid-area: description;
     display: grid;
-    grid-template-rows: 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
     grid-template-areas:
-      "text blueprint";
-
-    .blueprint {
-      grid-area: blueprint;
-    }
+      "text text"
+      "payload-weights payload-weights";
 
     p {
+      text-align: justify;
       grid-area: text;
     }
   }
 
-  payload-weights {
-    grid-area: payload-weights;
-  }
 }
 
 .content {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 20rem;
+  grid-template-rows: 45rem;
   grid-template-areas:
-    "details";
+    "slideshow";
 
   .details {
     grid-area: details;
+  }
+
+  .slideshow {
+    grid-area: slideshow;
+    border-radius: 3px;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .heading {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-gap: 1rem;
+    grid-template-areas:
+      "title title"
+      "image description"
+      "image description"
+      "payload-weights payload-weights";
   }
 }

@@ -1,137 +1,3 @@
-<!--<div class="col-12" *ngIf="rocket$ | async as rocket">-->
-    <!--<div class="row">-->
-        <!--<div class="col-4">-->
-            <!--<img class="img-fluid rounded"-->
-                 <!--src="assets/images/webp/{{rocket.id}}-500px.webp" />-->
-        <!--</div>-->
-        <!--<div class="col-8">-->
-            <!--<div class="pl-3">-->
-                <!--<h2>General information:</h2>-->
-                <!--<table class="table"-->
-                        <!--*ngIf="rocket">-->
-                    <!--<tbody>-->
-                        <!--<tr>-->
-                            <!--<td colspan="2">{{rocket.description}}</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>-->
-                                <!--<div>Mass:</div>-->
-                                <!--<div>Diameter:</div>-->
-                                <!--<div>Height:</div>-->
-                            <!--</td>-->
-                            <!--<td>-->
-                                <!--<div>{{rocket.mass.kg}}kg</div>-->
-                                <!--<div>{{rocket.diameter.meters}}m</div>-->
-                                <!--<div>{{rocket.height.meters}}m</div>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>-->
-                                <!--<div>Number of stages:</div>-->
-                                <!--<div>Number of boosters:</div>-->
-                            <!--</td>-->
-                            <!--<td>-->
-                                <!--<div>{{rocket.stages}}</div>-->
-                                <!--<div>{{rocket.boosters}}</div>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Reusable:</td>-->
-                            <!--<td>-->
-                                <!--<i class="success fa"-->
-                                    <!--[ngClass]="{'fa-check': rocket.firstStage.reusable, 'fa-times': !rocket.firstStage.reusable}">-->
-                                <!--</i>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Success rate:</td>-->
-                            <!--<td>{{rocket.successRate}}%</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>Cost per launch:</td>-->
-                            <!--<td>${{rocket.costPerLaunch}}</td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td>In use today:</td>-->
-                            <!--<td>-->
-                                <!--<i class="success fa"-->
-                                    <!--[ngClass]="{'fa-check': rocket.active, 'fa-times': !rocket.active}">-->
-                                <!--</i>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<hr>-->
-    <!--<div class="row mt-3">-->
-        <!--<div class="col-4">-->
-            <!--<h2>Payload weights:</h2>-->
-            <!--<table class="table"-->
-                    <!--*ngIf="rocket">-->
-                <!--<thead class="thead-inverse">-->
-                    <!--<th>Destination</th>-->
-                    <!--<th>Payload mass</th>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                    <!--<tr *ngFor="let pw of rocket.payloadWeights">-->
-                        <!--<td>{{pw.name}}</td>-->
-                        <!--<td>{{pw.kg}}kg</td>-->
-                    <!--</tr>-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
-        <!--<div class="col-8">-->
-            <!--<h2>Engines:</h2>-->
-            <!--<div class="row"-->
-                    <!--*ngIf="rocket">-->
-                <!--<div class="col-8">-->
-                    <!--<table class="table">-->
-                        <!--<tbody>-->
-                            <!--<tr>-->
-                                <!--<td>Type:</td>-->
-                                <!--<td>{{rocket.engines.type}} {{rocket.engines.version}}</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>Number of engines:</td>-->
-                                <!--<td>{{rocket.engines.numberOfEngines}}</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>Propellants:</td>-->
-                                <!--<td>-->
-                                    <!--<div>{{rocket.engines.propellantOne}}</div>-->
-                                    <!--<div>{{rocket.engines.propellantTwo}}</div>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>Max engine loss:</td>-->
-                                <!--<td>{{rocket.engines.maxEngineLoss}}</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<div>Thrust at sea level:</div>-->
-                                    <!--<div>Thrust in vacuum:</div>-->
-                                    <!--<div>Thrust to weight:</div>-->
-                                <!--</td>-->
-                                <!--<td>-->
-                                    <!--<div>{{rocket.engines.thrustSeaLevel.kN}}kN</div>-->
-                                    <!--<div>{{rocket.engines.thrustVacuum.kN}}kN</div>-->
-                                    <!--<div>{{rocket.engines.thrustToWeight}}</div>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                        <!--</tbody>-->
-                    <!--</table>-->
-                <!--</div>-->
-                <!--<div class="col-4">-->
-                    <!--<img src="assets/images/{{rocket.engines.type}}{{rocket.engines.version}}.jpg"-->
-                            <!--class="rounded img-fluid" />-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
 <section class="expanded-card">
   <div class="banner"></div>
 
@@ -139,101 +5,33 @@
        [@fadeAnimation]
        *ngIf="(rocket$ | async) as rocket">
     <div class="image">
-      <img src="assets/images/{{rocket.id}}-side-banner.png" />
+      <blueprint class="blueprint"
+                 [rocket]="rocket">
+      </blueprint>
     </div>
     <div class="title">
       <h1>{{rocket.name}}</h1>
-
-      <!--<div title="Mass">-->
-        <!--<i class="fas fa-weight-hanging"></i>-->
-        <!--<span>{{rocket.mass.kg | number: '1.':'nl'}}kg</span>-->
-      <!--</div>-->
-      <!--<div title="Height">-->
-        <!--<i class="fas fa-ruler-vertical"></i>-->
-        <!--<span>{{rocket.height.meters | number: '1.':'nl'}}m</span>-->
-      <!--</div>-->
-      <!--<div title="Diameter">-->
-        <!--<i class="fas fa-ruler-horizontal"></i>-->
-        <!--<span>{{rocket.diameter.meters | number: '1.':'nl'}}m</span>-->
-      <!--</div>-->
-
-      <!--<div class="links text-muted">-->
-        <!--<a [href]="launch.links.wikipedia"-->
-           <!--target="_blank"-->
-           <!--title="Wikipedia Article"-->
-           <!--*ngIf="launch.links.wikipedia">-->
-          <!--<i class="fab fa-wikipedia-w"></i>-->
-        <!--</a>-->
-        <!--<a [href]="launch.links.article"-->
-           <!--target="_blank"-->
-           <!--title="News Article"-->
-           <!--*ngIf="launch.links.article">-->
-          <!--<i class="far fa-newspaper"></i>-->
-        <!--</a>-->
-        <!--<a [href]="launch.links.presskit | https"-->
-           <!--target="_blank"-->
-           <!--title="Presskit"-->
-           <!--*ngIf="launch.links.presskit">-->
-          <!--<i class="fas fa-file-invoice"></i>-->
-        <!--</a>-->
-      <!--</div>-->
     </div>
 
     <div class="description">
       <p>
         {{rocket.description}}
       </p>
-
-      <blueprint class="blueprint"
-                 [rocket]="rocket">
-      </blueprint>
     </div>
+
+    <payload-weights [payloadWeights]="rocket.payloadWeights">
+    </payload-weights>
   </div>
 
   <div class="content">
-    <!--<blueprint class="blueprint"-->
-               <!--[@fadeAnimation]-->
-               <!--*ngIf="(rocket$ | async) as rocket"-->
-               <!--[rocket]="rocket">-->
-    <!--</blueprint>-->
 
-    <div class="details"
-       [@fadeAnimation]
-       *ngIf="(rocket$ | async) as rocket">
-      <payload-weights [payloadWeights]="rocket.payloadWeights"></payload-weights>
+    <div class="slideshow"
+         [@fadeAnimation]
+         *ngIf="(images$ | async) as images">
+      <slideshow [showArrows]="true"
+                 [imageUrls]="images">
+      </slideshow>
     </div>
-
-    <!--<div class="payloads"-->
-         <!--*ngIf="(launchData$ | async)?.launch as launch">-->
-      <!--<h3>Payload(s):</h3>-->
-      <!--<aside class="list"-->
-             <!--[@listAnimation]="(launch$ | async)">-->
-        <!--<div class="list-element"-->
-             <!--*ngFor="let payload of launch.rocket.secondStage.payloads">-->
-          <!--<div class="content">-->
-            <!--<div class="title">-->
-              <!--<h3>{{payload.id}}</h3>-->
-              <!--<div>{{payload.type}}</div>-->
-              <!--<div>{{payload.massKg | number: '2.':'nl'}}kg</div>-->
-            <!--</div>-->
-            <!--<div class="summary">-->
-              <!--<h4>Customer(s): <span *ngFor="let customer of payload.customers; let last = last">{{customer}}<span *ngIf="!last">,</span></span></h4>-->
-              <!--<div class="details">-->
-                <!--<div *ngIf="payload.orbitParams.apoapsis || payload.orbitParams.periapsis || payload.orbitParams.inclination || payload.orbitParams.eccentricity">-->
-                  <!--<h5>Orbital parameters:</h5>-->
-                  <!--<ul>-->
-                    <!--<li *ngIf="payload.orbitParams.apoapsis">Apoapsis: {{payload.orbitParams.apoapsis | number: '2.':'nl'}}km</li>-->
-                    <!--<li *ngIf="payload.orbitParams.periapsis">Periapsis: {{payload.orbitParams.periapsis | number: '2.':'nl'}}km</li>-->
-                    <!--<li *ngIf="payload.orbitParams.eccentricity">Eccentricity: {{payload.orbitParams.eccentricity}}</li>-->
-                    <!--<li *ngIf="payload.orbitParams.inclination">Inclination: {{payload.orbitParams.inclination}}&deg;</li>-->
-                  <!--</ul>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</aside>-->
-    <!--</div>-->
   </div>
 
   <div class="spinner">

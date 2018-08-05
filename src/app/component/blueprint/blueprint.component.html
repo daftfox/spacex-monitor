@@ -1,8 +1,4 @@
 <div class="container">
-  <!--<div class="heading">-->
-    <!--<h3>Specifications</h3>-->
-    <!--<small class="text-muted">Pseudo-detailed operational specifications for this model rocket.</small>-->
-  <!--</div>-->
   <div class="blueprint"
        *ngIf="rocket">
     <div class="codename">project {{rocket.id}}</div>
@@ -10,11 +6,11 @@
     <div class="specs">
       <div title="Mass">
         <i class="fas fa-weight-hanging"></i>
-        <span>{{rocket.mass.kg | thousand: 2}} tons</span>
+        <span>{{rocket.mass.kg | division: 1000 : 1 }} tons</span>
       </div>
       <div title="Cost per launch (USD)">
         <i class="fas fa-file-invoice-dollar"></i>
-        <span>${{rocket.costPerLaunch | million: 0}} million</span>
+        <span>${{rocket.costPerLaunch | division: 1000000 : 1 }} million</span>
       </div>
       <div title="First flight">
         <i class="fas fa-calendar"></i>
@@ -97,11 +93,11 @@
       <table>
         <tbody>
           <tr>
-            <td>{{rocket.secondStage.payloads.optionOne | capitalize}}</td>
+            <td> - {{rocket.secondStage.payloads.optionOne | capitalize}}</td>
           </tr>
 
           <tr *ngIf="rocket.secondStage.payloads.optionTwo">
-            <td>{{rocket.secondStage.payloads.optionTwo | capitalize}}</td>
+            <td> - {{rocket.secondStage.payloads.optionTwo | capitalize}}</td>
           </tr>
 
 

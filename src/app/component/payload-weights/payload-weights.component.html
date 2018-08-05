@@ -8,8 +8,9 @@
   <div class="payload-weights">
     <div class="weight"
          *ngFor="let payloadWeight of payloadWeights">
-      <span class="name" [ngClass]="{'uppercase': payloadWeight.id.length <= 3, 'capitalize': payloadWeight.id.length > 3}">{{payloadWeight.id}}</span>
-      <span class="mass">{{payloadWeight.kg | number: '1.':'nl'}}kg</span>
+      <div class="name">{{payloadWeight.name}}<span class="uppercase" *ngIf="payloadWeight.id.length < 4"> ({{payloadWeight.id}})</span></div>
+      <div class="icon" [ngClass]="payloadWeight.id"></div>
+      <div class="mass">{{payloadWeight.kg | division : '1000' | number: '1.':'nl'}} tons</div>
     </div>
   </div>
 </article>

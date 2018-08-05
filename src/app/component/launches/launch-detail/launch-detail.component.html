@@ -4,6 +4,11 @@
   <div class="heading"
        [@fadeAnimation]
        *ngIf="(launchData$ | async)?.launch as launch">
+    <div class="success-ribbon" [ngClass]="[launch.success.toString()]">
+      <i class="fas"
+         [ngClass]="{'fa-check': launch.success, 'fa-times': !launch.success}">
+      </i>
+    </div>
     <div class="image">
       <img [src]="launch.links.missionPatch" [alt]="launch.missionName" />
     </div>
@@ -17,12 +22,12 @@
         <i class="fas fa-rocket"></i>
         <a [routerLink]="['/', 'rockets', launch.rocket.id]">{{launch.rocket.name}}</a>
       </div>
-      <div>
-        <i class="success fas"
-           [ngClass]="{'fa-check': launch.success, 'fa-times': !launch.success}">
-        </i>
-        <span>{{ launch.success ? 'Successful launch' : 'Launch failure' }}</span>
-      </div>
+      <!--<div>-->
+        <!--<i class="success fas"-->
+           <!--[ngClass]="{'fa-check': launch.success, 'fa-times': !launch.success}">-->
+        <!--</i>-->
+        <!--<span>{{ launch.success ? 'Successful launch' : 'Launch failure' }}</span>-->
+      <!--</div>-->
       <div>
         <i class="fas fa-map-marked"></i>
         <span>{{launch.launchSite.longName}}</span>
